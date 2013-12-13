@@ -1,0 +1,35 @@
+/**
+ * 	Estilo para el botón de activado y desactivado del PopUp
+ *  de la API de GeoBolivia
+ */
+.firstItemInactive{	
+	width: 22px;
+	height: 22px;	
+	background-image: url("../theme/fatcow/img/information_off.png");
+	background-repeat: no-repeat;
+	/*border: 0px solid #dddddd;*/
+	border: 3px solid rgba(255, 255, 255, 0.4);
+	border-radius: 6px 6px 6px 6px;
+	position: absolute;
+	/*border-radius: 4px 4px 4px 4px;*/
+	left: 8px;       
+    top: 60px;		
+}
+
+.firstItemActive{
+	width: 22px;
+	height: 22px;
+	background-image: url("../theme/fatcow/img/information_on.png");
+	background-repeat: no-repeat;
+	border: 3px solid rgba(255, 255, 255, 0.4);
+	border-radius: 6px 6px 6px 6px;
+	position: absolute;
+	/*border-radius: 4px 4px 4px 4px;*/
+	left: 8px;    
+    top: 60px;
+    /*cursor: crosshair;*/ 	
+}
+
+.firstItemActive .olDrawBox {
+    cursor: crosshair;
+}

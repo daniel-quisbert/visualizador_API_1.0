@@ -1,0 +1,163 @@
+/* General Demo Style */
+
+/* Reset */
+*,
+*:after,
+*:before {
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+	content: " ";
+	display: table;
+}
+
+.clearfix:after {
+	clear: both;
+}
+
+a {
+	color: #f0f0f0;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000;
+}
+
+
+.container > header {
+	width: auto;
+	max-width: 69em;
+	margin: 0 auto;
+	padding: 0 1.875em 3.125em 1.875em;
+	position:absolute;
+	z-index: 1200;
+}
+
+.container > header {
+	padding: 2.875em 1.875em 1.875em;
+}
+
+.container > header h1 {
+	font-size: 2.125em;
+	line-height: 1.3;
+	margin: 0;
+	float: left;
+	font-weight: 400;
+}
+
+.container > header span {
+	display: block;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.5em;
+	padding: 0 0 0.6em 0.1em;
+}
+
+.container > header nav {
+	top: 30px;
+	float: right;
+}
+
+.container > header nav a {
+	display: block;
+	float: left;
+	position: relative;
+	width: 2.5em;
+	height: 2.5em;
+	background: #fff;
+	border-radius: 50%;
+	color: transparent;
+	margin: 0 0.1em;
+	border: 4px solid #47a3da;
+	text-indent: -8000px;
+}
+
+.container > header nav a:after {
+	content: attr(data-info);
+	color: #47a3da;
+	position: absolute;
+	width: 600%;
+	top: 120%;
+	text-align: right;
+	right: 0;
+	opacity: 0;
+	pointer-events: none;
+}
+
+.container > header nav a:hover:after {
+	opacity: 1;
+}
+
+.container > header nav a:hover {
+	background: #47a3da;
+}
+
+.main > section {
+	position:absolute;
+	z-index: 1200;
+	max-width: 260px;
+	width: auto;
+	right:30px;	
+	top: 1px;
+}
+
+.main > section h2 {
+	font-weight: 300;
+	color: #ccc;
+}
+
+
+.main > section button {
+	position: absolute;	
+	z-index: 1200;
+	width: 26px;
+	height: 26px;	
+	border: none;
+	background: #777777;
+	color: #fff;
+	padding: 1px;
+	/*display: block;*/
+	
+	cursor: pointer;
+	margin: 10px 0;
+	font-size: 0.8em;
+}
+/***************************/
+#showRight{
+	background-image: url("../img/icon-legend.png");
+	width: 25px;
+	height: 25px;	
+	background-repeat: no-repeat;	
+}
+
+.main > section button:hover {	
+	background: #555555;
+}
+
+.main > section button.active {
+	background: #222222;
+}
+
+.main > section button.disabled {
+	background: #aaa;
+	pointer-events: none;
+}
+
+.container > header nav a:hover:before {
+	color: #fff;
+}
+
+.icon-drop:before {
+	content: "\e000";
+}
+
+.icon-arrow-left:before {
+	content: "\f060";
+}
+
