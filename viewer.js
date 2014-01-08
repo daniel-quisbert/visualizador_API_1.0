@@ -15,6 +15,7 @@
  * @author cperez@geo.gob.bo (Ariel Perez)
  * @author fvelasquez@geo.gob.bo (Rodolfo Velasquez)
  * @author slesage@geo.gob.bo (Sylvain Lesage)
+ *
  * Modify by:
  * @author mquisbert@geo.gob.bo [Daniel Quisbert]
  */
@@ -26,8 +27,7 @@
 /*jslint browser: true*/
 /*global OpenLayers*/
 
-/*(function () {*/
-"use strict";
+/*(function () {*/"use strict";
 
 var init, map;
 
@@ -72,93 +72,22 @@ function Configuration() {
 	this.bgmap2 = "";
 	//this.proxy = "/proxy/?url=";
 	this.proxy = "/cgi-bin/proxy.cgi?url=";
-	//this.hasLegend = false;
-	//this.legendWidthWithin = '199px';
-	//this.legendWidth = '200px';
-	//this.hasMetadata = false;
-	//this.metadataHeightWithin = '190px';
-	//this.metadataHeight = '200px';
-	/*this.hasTools = false;
-	this.toolsHeightWithin = '28px';
-	this.toolsBorder = '1px';
-	this.toolsHeight = '29px';
-	this.hasMeasureTools = false;*/	
-	this.zdakar = '0';	// zdakar: variable sólo para los mapas del DAKAR
+	this.zdakar = '0';
+	// zdakar: variable sólo para los mapas del DAKAR
 }
 
 /**
  * Parse and validate the URL parameters
  */
 Configuration.prototype.getUrlParameters = function() {
-	
 	this.infoLayer = (getUrlParameter('infoLayer') === "on") || this.infoLayer;
 	this.bgmap = getUrlParameter('bgmap') || this.bgmap;
 	this.bgmap2 = getUrlParameter('bgmap2') || this.bgmap2;
 	this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
-	this.wmcUrl = this.wmcUrl.replace(/www.geo.gob.bo/g, 'geo.gob.bo');
-	//this.hasLegend = (getUrlParameter('legend') === "on") || this.hasLegend;
-	//this.legendWidth = createSizePx(getUrlParameter('legendwidth')) || this.legendWidth;
-	//this.legendWidthWithin = createSizePx(this.legendWidth, -1);
-	//this.hasMetadata = (getUrlParameter('metadata') === "on") || this.hasMetadata;
-	//this.metadataHeight = createSizePx(getUrlParameter('metadataheight')) || this.metadataHeight;
-	//this.metadataHeightWithin = createSizePx(this.metadataHeight, -10);
-	this.hasTools = (getUrlParameter('tools') === "on") || this.hasTools;		
+	this.wmcUrl = this.wmcUrl.replace(/www.geo.gob.bo/g, 'geo.gob.bo');	
 	this.zdakar = getUrlParameter('zdakar') || this.zdakar;
-	//this.hasMeasureTools = (getUrlParameter('measuretools') === "on") || this.hasMeasureTools;
+
 };
-
-/**
- * Set the size of all <div> elements
- * @param {Configuration} conf Configuration of the viewer
- */
-function createLayout(conf) {
-	var wrapper1, wrapper2, wrapper3, wrapper4, map, legend, metadata, tools, icons, measure;
-
-	/*wrapper1 = document.getElementById('wrapper1');
-	wrapper2 = document.getElementById('wrapper2');
-	wrapper3 = document.getElementById('wrapper3');
-	wrapper4 = document.getElementById('wrapper4');*/
-	map = document.getElementById('map');
-	//legend = document.getElementById('legend');
-	legend = document.getElementById('cbp-spmenu-s2');
-	
-	//metadata = document.getElementById('metadata');
-	tools = document.getElementById('tools');
-	icons = document.getElementById('icons');
-	measure = document.getElementById('measure');
-
-	/*if (conf.hasTools) {
-		wrapper4.style.top = conf.toolsHeight;
-		tools.style.height = conf.toolsHeightWithin;
-		tools.style.borderBottomWidth = conf.toolsBorder;
-		//if (!conf.hasMeasureTools) {
-			//tools.removeChild(measure);
-		//}
-	} else {
-		wrapper3.removeChild(tools);
-	}
-
-	/*if (conf.hasMetadata) {
-		wrapper2.style.bottom = conf.metadataHeight;
-		metadata.style.height = conf.metadataHeightWithin;
-		metadata.style.display = 'block';
-	} 
-	/*else {
-		wrapper1.removeChild(metadata);
-	}*/
-
-	/*if (conf.hasLegend) {
-		wrapper3.style.marginLeft = '-' + conf.legendWidth;
-		tools.style.marginLeft = '-' + conf.legendWidth;
-		icons.style.marginLeft = conf.legendWidth;
-		wrapper4.style.marginLeft = '-' + conf.legendWidth;
-		map.setAttribute('style', 'margin-left: ' + conf.legendWidth + ' !important');
-		legend.style.width = conf.legendWidthWithin;
-	} 
-	/*	else {
-		wrapper2.removeChild(legend);
-	}*/
-}
 
 function replaceUrl(url, title) {
 	var geoserver = "geoserver";
@@ -182,7 +111,6 @@ function replaceUrl(url, title) {
 	if (indW > 0) {
 		url2 = url2.substring(0, indW);
 	}
-
 	//GEOWEBCACHE DE GEOSERVER
 	indW = url2.lastIndexOf("gwc");
 	if (indW > 0) {
@@ -203,171 +131,19 @@ function replaceUrl(url, title) {
  * Fill the #legend <div>
  */
 function createLegend2() {
-	var control, i, layer;	
-	//if (map && document.getElementById('legend')) {
-	if (map && document.getElementById('cbp-spmenu-s2')) {
+	var control, i, layer, url;
+	if (map && document.getElementById('content_legend')) {
 		for ( i = 0; i < map.layers.length; i += 1) {
 			layer = map.layers[i];
 			if (layer.getVisibility() && layer.params) {
-				var url = layer.url + "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=" + layer.params["LAYERS"];
-				layer.name =  "<img src='" + url + "'/> <em style='color:#fff;'>"+layer.name+"</em>";
+				url = layer.url + "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=" + layer.params["LAYERS"];
+				layer.name = cleanNameLayer(layer.name) + "<br><img src='" + url + "'/>";
 			}
 		}
 		control = new OpenLayers.Control.LayerSwitcher({
-			'div' : OpenLayers.Util.getElement('cbp-spmenu-s2')
+			'div' : OpenLayers.Util.getElement('content_legend')
 		});
 		map.addControl(control);
-	}
-}
-
-function createLegend(conf) {
-	var control, i, layer;
-
-	if (map && conf.hasLegend && document.getElementById('legend')) {
-		/* Include the legend images in the layers name */
-		for ( i = 0; i < map.layers.length; i += 1) {
-			layer = map.layers[i];
-			if (layer.metadata && layer.metadata.styles[0] && layer.metadata.styles[0].legend && layer.metadata.styles[0].legend.href) {
-				layer.name = layer.name + '<br/><img src="' + layer.metadata.styles[0].legend.href + '"/>';
-			}
-		}
-
-		control = new OpenLayers.Control.LayerSwitcher({
-			'div' : OpenLayers.Util.getElement('legend')
-		});
-		map.addControl(control);
-	}
-}
-
-/**
- * Add an item in the <ul> list of the #metadata <div>
- * @param {Array} capLayer Layer array extracted from GetCapabilities response
- */
-function addMetadataItem(capLayer) {
-	var metadataUl, item, li, attr;
-	metadataUl = document.getElementById('metadata-ul');
-	if (capLayer && metadataUl) {
-		item = '';
-		if (capLayer.title) {
-			item += "<span class='title'>" + capLayer.title + "</span>";
-		}
-		if (capLayer.metadataURLs.length > 0) {
-			if (capLayer.metadataURLs[0].href) {
-				item += "<span class='metadata-url'><a href='" + capLayer.metadataURLs[0].href + "'>Más información</a></span>";
-			}
-		}
-		if (capLayer.attribution) {
-			attr = '';
-			if (capLayer.attribution.title) {
-				attr += capLayer.attribution.title;
-			}
-			if (capLayer.attribution.logo && capLayer.attribution.logo.href) {
-				attr += "<img src='" + capLayer.attribution.logo.href + "'/>";
-			}
-			if (capLayer.attribution.href) {
-				attr = "<a href='" + capLayer.attribution.href + "'>" + attr + "</a>";
-			}
-			item += "<span class='attribution'>" + attr + "</span>";
-		}
-		li = document.createElement('li');
-		li.innerHTML = item;
-		metadataUl.appendChild(li);
-	}
-}
-
-/**
- * Get metadata of the layers using GetCapabilities
- * Put the results as properties of the layers
- */
-function callbackGetCapabilities(request) {
-	var xmlFormat, responseXml, capFormat, capObj, capLayers, i, j, capLayer, layer, attr;
-	xmlFormat = new OpenLayers.Format.XML();
-	capFormat = new OpenLayers.Format.WMSCapabilities();
-	if (request.status < 200 || request.status >= 300) {
-		// Error
-		/*alert("Error de status " + request.status);*/
-		return;
-	}
-	if (!request.responseText) {
-		// Error
-		/*alert("Error de responseText");*/
-		return;
-	}
-	/*if (!request.responseXml) {
-	 } else {
-	 responseXml = request.responseXml;
-	 }*/
-	responseXml = xmlFormat.read(request.responseText);
-	capObj = capFormat.read(responseXml);
-	capLayers = capObj.capability.layers;
-	if (map && map.layers.length > 0) {
-		for ( j = 0; j < map.layers.length; j += 1) {
-			for ( i = 0; i < capLayers.length; i += 1) {
-				capLayer = capLayers[i];
-				layer = map.layers[j];
-				if (layer.params.LAYERS === capLayer.name) {
-					/* Match */
-					addMetadataItem(capLayer);
-				}
-			}
-		}
-	}
-}
-
-/**
- * Get metadata of the layers using GetCapabilities
- * Put the results as properties of the layers
- */
-function getRemoteMetadata() {
-	var i, layer, wmsUrls, urlOrig, version, urlObj, url;
-	if (map && map.layers.length > 0) {
-		wmsUrls = [];
-
-		/* Prepare the WMS URL (various layers may share the same WMS URL) */
-		for ( i = 0; i < map.layers.length; i += 1) {
-			layer = map.layers[i];
-
-			/* Refactor the URL to avoid :80/ */
-			urlOrig = layer.url;
-			version = layer.params.VERSION;
-			if (urlOrig && version) {
-				urlObj = OpenLayers.Util.createUrlObject(urlOrig);
-				url = urlObj.protocol + '//' + urlObj.host;
-				if (urlObj.port && urlObj.port !== "80") {
-					url += ':' + urlObj.port;
-				}
-				url += urlObj.pathname;
-				urlObj.args.REQUEST = "GetCapabilities";
-				urlObj.args.VERSION = version;
-				url = OpenLayers.Util.urlAppend(url, OpenLayers.Util.getParameterString(urlObj.args));
-				if (wmsUrls.indexOf(url) < 0) {
-					wmsUrls.push(url);
-				}
-			}
-		}
-
-		for ( i = 0; i < wmsUrls.length; i += 1) {
-			OpenLayers.Request.GET({
-				url : wmsUrls[i],
-				callback : callbackGetCapabilities,
-				async : false
-			});
-		}
-
-	}
-}
-
-/**
- * Fill the #metadata <div>
- */
-function createMetadata(conf) {
-	var metadata, list, content, i, layer, nameStr, metadataStr;
-
-	metadata = document.getElementById('metadata');
-	if (map && conf.hasMetadata && metadata) {
-		if (map.layers.length > 0) {
-			getRemoteMetadata();
-		}
 	}
 }
 
@@ -382,7 +158,7 @@ function handleLineMeasure(event) {
 	out = "";
 	if (event.order === 1) {
 		/* Trick for the number format: http://stackoverflow.com/a/4689230 */
-		out += "longitud: " + event.measure.toPrecision(4) + " " + event.units;
+		out += "Longitud: " + event.measure.toPrecision(4) + " " + event.units;
 	}
 	element.innerHTML = out;
 }
@@ -398,7 +174,7 @@ function handleAreaMeasure(event) {
 	out = "";
 	if (event.order === 2) {
 		/* Trick for the number format: http://stackoverflow.com/a/4689230 */
-		out += "superficie: " + Number(event.measure.toPrecision(4)) + " " + event.units + "<sup>2</" + "sup>";
+		out += "Superficie: " + Number(event.measure.toPrecision(4)) + " " + event.units + "<sup>2</sup>";
 	}
 	element.innerHTML = out;
 }
@@ -407,50 +183,70 @@ function handleAreaMeasure(event) {
  * Fill the #tools <div>
  */
 function createTools(conf) {
-	var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl, areaMeasureCtl;
+	var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl, areaMeasureCtl, btnInfo, btnFs;
 
 	tools = document.getElementById('tools');
 	icons = document.getElementById('icons');
 	measure = document.getElementById('measure');
-	if (map && conf.hasTools && tools && icons) {
+	//if (map && conf.hasTools && tools && icons) {
 		/* Controls */
 		navCtl = new OpenLayers.Control.NavigationHistory({
-			'displayClass' : 'hist'
+			displayClass : 'hist'
 		});
+		navCtl.previous.title='Atrás';
+		navCtl.next.title='Adelante';		
+		
 		fakePanCtl = new OpenLayers.Control({
+			title: "Mover",
 			displayClass : 'pan'
 		});
 		/* Controls panel */
 		panelCtl = new OpenLayers.Control.Panel({
 			'div' : icons,
 			'defaultControl' : fakePanCtl
+		});		
+		/* Add to map */		
+		map.addControl(navCtl);		
+			
+		lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
+			title: "Distancia",
+			persist : true,
+			immediate : true,
+			displayClass : 'path'
 		});
-		/* Add to map */
-		map.addControl(navCtl);
-		panelCtl.addControls([navCtl.previous, navCtl.next, fakePanCtl]);
-		//if (conf.hasMeasureTools && measure) {
-			lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
-				persist : true,
-				immediate : true,
-				displayClass : 'path'
-			});
-			lineMeasureCtl.events.on({
-				"measure" : handleLineMeasure,
-				"measurepartial" : handleLineMeasure
-			});
-			areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
-				persist : true,
-				immediate : true,
-				displayClass : 'polygon'
-			});
-			areaMeasureCtl.events.on({
-				"measure" : handleAreaMeasure,
-				"measurepartial" : handleAreaMeasure
-			});
-			panelCtl.addControls([lineMeasureCtl, areaMeasureCtl]);
-		//}
+		lineMeasureCtl.events.on({			
+			"measure" : handleLineMeasure,
+			"measurepartial" : handleLineMeasure
+		});	
+		areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
+			title: "Área",
+			persist : true,
+			immediate : true,
+			displayClass : 'polygon'
+		});
+		areaMeasureCtl.events.on({
+			"measure" : handleAreaMeasure,
+			"measurepartial" : handleAreaMeasure
+		});
+		panelCtl.addControls([new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
+			navCtl.previous, 
+			navCtl.next, 
+			fakePanCtl,
+			new OpenLayers.Control.ZoomIn({title: "Acercarse"}),
+        	new OpenLayers.Control.ZoomOut({title: "Alejarse"}),
+        	lineMeasureCtl, 
+        	areaMeasureCtl]);	
+		
+		/*  Se crea el botón 'i' para mostrar la informacón de las capas en un popup
+		 **/			
+		if (conf.infoLayer) {
+			btnInfo = infoPopup(panelCtl);
+			panelCtl.addControls([btnInfo]);
+		}		
+		verifyFullScreen(panelCtl);
 		map.addControl(panelCtl);
-	}
+		
+	//}
 }
 
 /**
@@ -499,145 +295,172 @@ function loadWmc(conf, protocol) {
 				return;
 			}
 			format = new OpenLayers.Format.WMC();
-			OpenLayers.DOTS_PER_INCH = 90.71428571428572;
+			//OpenLayers.DOTS_PER_INCH = 90.71428571428572;
 			var text = request.responseText;
 			context = format.read(text);
 
 			// Change the map scale
-			MAP_SCALES = [
-			4265.459166936, 8530.918333871, 
-			17061.836667742, 34123.673335484, 
-			68247.346670968, 136494.693341936, 
-			272989.386683873, 545978.773367746, 
-			1091957.546735491, 2183915.093470982, 
-			4367830.186941965, 8735660.373883929];
+			MAP_SCALES = [4265.459166936, 8530.918333871, 17061.836667742, 34123.673335484, 68247.346670968, 136494.693341936, 272989.386683873, 545978.773367746, 1091957.546735491, 2183915.093470982, 4367830.186941965, 8735660.373883929];
 			options = {
 				scales : MAP_SCALES
-			};					
-				map = new OpenLayers.Map("map", {					
-			       	div : 'map',
-			       	//allOverlays : true,
-			        maxResolution: 196543.0339,			       	
-			       	//restrictedExtent : extendOsmGoogle(context.bounds),
-			       	units: context.units,		       	
-			       	maxExtent: extendOsmGoogle(context.bounds),
-			        numZoomLevels : 22,
-					projection : new OpenLayers.Projection("EPSG:900913"),
-					displayProjection : new OpenLayers.Projection("EPSG:4326")					        	
-				});
-				map.setOptions(options);				
-				if(backgroundMap(conf) != 0){
-					map.addLayers(backgroundMap(conf));
-				}
-				if(backgroundMap2(conf) != 0){
+			};
+			map = new OpenLayers.Map("map", {
+				div : 'map',
+				//allOverlays : true,
+				maxResolution : 196543.0339,
+				restrictedExtent : extendOsmGoogle(context.bounds),
+				units : context.units,
+				maxExtent : extendOsmGoogle(context.bounds),
+				numZoomLevels : 22,
+				projection : new OpenLayers.Projection("EPSG:900913"),
+				displayProjection : new OpenLayers.Projection("EPSG:4326"),
+				controls: [
+				new OpenLayers.Control.Navigation({
+	                mouseWheelOptions: {
+	                    cumulative: false,
+	                    interval: 100
+	                },
+	                dragPanOptions: {
+	                    enableKinetic: {
+	                        deceleration: 0.02
+	                }
+	            }}),
+				new OpenLayers.Control.ZoomBox()]
+            });
+			map.setOptions(options);
+			// Validamos para que el usuario tenga que escoger si o si un fondo de mapa,
+			// caso contrario se mostrara un mensaje indicando que debe escoger por lo menos uno. 
+			if (backgroundMap(conf) == 0) {
+				if (backgroundMap2(conf) == 0) {
+					alert("Debe Seleccionar por lo menos un fondo de mapa!");
+				}else{		
 					map.addLayers(backgroundMap2(conf));
-				}						
-				
-								
-			for ( i = 0; i < map.layers.length; i += 1) {				
-				//map.layers[i].gutter = 10;
-				map.layers[i].setTileSize(new OpenLayers.Size(256, 256));				
-				//map.layers[i].addOptions(options, true);
+				}			
 			}			
-			
+			else{
+				map.addLayers(backgroundMap(conf));
+				if (backgroundMap2(conf) != 0) {
+					map.addLayers(backgroundMap2(conf));
+				}					
+			}
+
+			for ( i = 0; i < map.layers.length; i += 1) {
+				//map.layers[i].gutter = 10;
+				map.layers[i].setTileSize(new OpenLayers.Size(256, 256));
+				//map.layers[i].addOptions(options, true);
+			}
+
 			//Add Layers
 			map.addLayers(getLayerWmc(text));
-			createLegend2(conf);			
+			createLegend2(conf);
 			createTools(conf);
-			removeAjaxLoader();					
-			
-			z = 6;	// z: nivel de ZOOM para los mapas	
-			b =  context.bounds;
-			if(conf.zdakar != "0"){
-				z = 16;				
+			removeAjaxLoader();
+
+			z = 6;
+			// z: nivel de ZOOM para los mapas
+			b = context.bounds;
+			if (conf.zdakar != "0") {
+				if (conf.zdakar == "5") {
+					z = 8;
+				} else {
+					z = 16;
+				}
 				b = boundZdakar(conf.zdakar);
 			}
-			map.setCenter(
-				b.getCenterLonLat(), 
-				z
-			);
+			map.setCenter(b.getCenterLonLat(), z);
 			// fondo de mapa con zoom de acuerdo a los boundingbox
-			//map.zoomToExtent(extendOsmGoogle(context.bounds));			
+			//map.zoomToExtent(extendOsmGoogle(context.bounds));
 		}
 	});
 	return request;
 }
+
 /**
+ * Función especial sólo para los WMC de las regiones del Dakar
+ * para utilizarla se debe enviar la variable zdakar en el envio GET
+ * osea, aumentar la variable (&amp;zdakar=1,2,3,4,5, donde 1,2,3,4 y 5 son las regiones de las cuales se 
+ * desea obtener los bounds) en la propiedad 'href' del código generado
+ * como en el siguiente ejemplo :
+ *
+ * http://geo.gob.bo/api/viewer.html?wmc=http:/geo.gob.bo/IMG/wmc/dakar.wmc&amp;bgmap=fondo_osm_mapnik&amp;zdakar=1
+ *
  * Ajuste de los Bounds a los de las regiones del DAKAR, (Potosí, Tupiza, Uyuni, Villazón)
  */
- 
-function boundZdakar(zd){
+
+function boundZdakar(zd) {
 	var b;
 	switch (zd) {
 		case "1":
-		// Bounds Potosi
-		b =  new OpenLayers.Bounds(-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022);
-		break;		
+			// Bounds Potosi
+			b = new OpenLayers.Bounds(-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022);
+			break;
 		case "2":
-		// Bounds Tupiza
-		b =  new OpenLayers.Bounds(-7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987);
-		break;		
+			// Bounds Tupiza
+			b = new OpenLayers.Bounds(-7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987);
+			break;
 		case "3":
-		// Bounds Uyuni
-		b =  new OpenLayers.Bounds(-7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002);
-		break;		
+			// Bounds Uyuni
+			b = new OpenLayers.Bounds(-7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002);
+			break;
 		case "4":
-		// Bounds Villazón
-		b =  new OpenLayers.Bounds(-7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993);
-		break;
+			// Bounds Villazón
+			b = new OpenLayers.Bounds(-7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993);
+			break;
+		case "5":
+			// Bounds Regiónwa
+			b = new OpenLayers.Bounds(-7676501.00000000, -2633883.00000000, -7248100.00000000, -2138282.00000000);
+			break;
 	}
 	return b;
 }
+
 /**
  * Verifica si los bounds son los de la región
  * */
-function searchBounds(bounds){
-	var resp = false, c=0;	
-	var s= [-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022,	
-			-7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987,	
-			-7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002,	
-			-7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993];		
-	for(var j=0; j<4 ; j++){		
-		for(var i=0; i<s.length;i++){
-			if(bounds[j]==parseFloat(s[i]).toFixed(7)){
+function searchBounds(bounds) {
+	var resp = false, c = 0;
+	var s = [-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022, -7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987, -7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002, -7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993];
+	for (var j = 0; j < 5; j++) {
+		for (var i = 0; i < s.length; i++) {
+			if (bounds[j] == parseFloat(s[i]).toFixed(7)) {
 				c++;
 			}
-		}			
-	}	
-	if(c > 2){
-		resp =  true;			
-	}	
+		}
+	}
+	if (c > 2) {
+		resp = true;
+	}
 	return resp;
 }
 
-function extendOsmGoogle (extendMap){
+function extendOsmGoogle(extendMap) {
 	var nx, a;
-	a = extendMap.toArray();				
-	a[0] = parseFloat(a[0]) + parseFloat(a[0])*-0.011;	
-	a[1] = parseFloat(a[1]) + parseFloat(a[1])*	0.0;	
-	a[2] = parseFloat(a[2]) + parseFloat(a[2])*	0.0;	
-	a[3] = parseFloat(a[3]) + parseFloat(a[3])*	0.0;		
-	nx = new OpenLayers.Bounds(a[0],a[1],a[2],a[3]);			
+	a = extendMap.toArray();
+	a[0] = parseFloat(a[0]) + parseFloat(a[0]) * -0.011;
+	a[1] = parseFloat(a[1]) + parseFloat(a[1]) * 0.0;
+	a[2] = parseFloat(a[2]) + parseFloat(a[2]) * 0.0;
+	a[3] = parseFloat(a[3]) + parseFloat(a[3]) * 0.0;
+	nx = new OpenLayers.Bounds(a[0], a[1], a[2], a[3]);
 	return nx;
-}	
-
+}
+/**
+ * Función que devuelve el primer fondo de mapa
+ */
 function backgroundMap(conf) {
-	var bmap;
+	var bmap = 0;
 	switch (conf.bgmap) {
 		case "fondo_osm_mapnik":
 			bmap = new OpenLayers.Layer.OSM("Mapnik");
-			break;		
-		case "fondo_osm_google_like":   
-		  	bmap = new OpenLayers.Layer.OSM("Google-like",  
-		  		 ["http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png", "http://b.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png", "http://c.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png"], {  
-		 		"tileOptions" : {  
-		 		"crossOriginKeyword" : null  
-		 		}  
-		 	}); 			  
-		break;  
+			break;
+		case "fondo_osm_google_like":
+			bmap = new OpenLayers.Layer.OSM("Google-like", ["http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png", "http://b.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png", "http://c.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/9/256/${z}/${x}/${y}.png"], {
+				"tileOptions" : {
+					"crossOriginKeyword" : null
+				}
+			});
+			break;
 		case "fondo_osm_midnight_commander":
-			bmap = new OpenLayers.Layer.OSM("Midnight Commander", 
-				["http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png", "http://b.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png", "http://c.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png"], {				
+			bmap = new OpenLayers.Layer.OSM("Midnight Commander", ["http://a.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png", "http://b.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png", "http://c.tile.cloudmade.com/BC9A493B41014CAABB98F0471D759707/999/256/${z}/${x}/${y}.png"], {
 				"tileOptions" : {
 					"crossOriginKeyword" : null
 				}
@@ -645,49 +468,40 @@ function backgroundMap(conf) {
 			break;
 		case "fondo_google_streets":
 			bmap = new OpenLayers.Layer.Google("Google Streets", {
-				type : google.maps.MapTypeId.ROADMAP,				
+				type : google.maps.MapTypeId.ROADMAP,
 			});
-			break;	
-					
-		case "fondo_opcional":			
-			bmap = 0;
-			break;
-		default:
 			break;		
 	}
 	return [bmap];
 }
 
+/**
+ * Función que devuelve el segundo fondo de mapa
+ */
 function backgroundMap2(conf) {
-	var bmap2;
+	var bmap2 = 0;
 	switch (conf.bgmap2) {
 		case "fondo_google_satellite":
 			bmap2 = new OpenLayers.Layer.Google("Google Satellite", {
-				type : google.maps.MapTypeId.SATELLITE,			
+				type : google.maps.MapTypeId.SATELLITE,
 			});
-			break;	
+			break;
 		case "fondo_google_hybrid":
 			bmap2 = new OpenLayers.Layer.Google("Google Hybrid", {
-				type : google.maps.MapTypeId.HYBRID,												
+				type : google.maps.MapTypeId.HYBRID,
 			});
-			break;	
+			break;
 		case "fondo_osm_cyclemap":
 			bmap2 = new OpenLayers.Layer.OSM.CycleMap("CycleMap");
 			break;
 		case "fondo_google_physical":
 			bmap2 = new OpenLayers.Layer.Google("Google Physical", {
-				type : google.maps.MapTypeId.TERRAIN,								
+				type : google.maps.MapTypeId.TERRAIN,
 			});
-			break;			
-		case "fondo_opcional":			
-			bmap2 = 0;
-			break;
-		default:
-			break;		
+			break;				
 	}
 	return [bmap2];
 }
-
 
 function getLayerWmc(wmcString) {
 	var wmcFormat = new OpenLayers.Format.WMC();
@@ -717,202 +531,201 @@ function getLayerWmc(wmcString) {
 function createMap(conf) {
 	var request;
 	request = loadWmc(conf);
-
 	if (request.status < 200 || request.status >= 300 || !request.responseText) {
 		// probamos en HTTP por si acaso
 		request = loadWmc(conf, 'http:');
 	}
 }
-
 /* Inserta un botón de infromación
-*  que muestra la información del lugar en un popup
-*/
+ *  que muestra la información del lugar en un popup
+ */
 
-function infoPopup(){
-    var info, panel, popup;
-    var panelPopup = new OpenLayers.Control.Panel({displayClass: 'first'});    
-    map.addControl(panelPopup);
-        	
-	 // create a control to get feature info from queryable layers
-            info = new OpenLayers.Control.WMSGetFeatureInfo({
-                //url: "http://localhost:8080/geoserver/wms",
-                title: 'Identify features by clicking',
-                //layers: yyyyy,
-            });
-            map.addControl(info);
-
-            // register a listener for the getfeatureinfo event on the control
-            info.events.on({
-                getfeatureinfo: function(event) {
-                    // close existing popup
-                    if (popup) {
-                        popup.destroy();
-                    }
-                     var text = "<html><body>No existen datos para ser consultados</body></html>";
-					if(event.text.indexOf("/table") > 0){
-						text = event.text;
-					} 
-                    popup = new GeoExt.Popup({
-                        title: "GeoBolivia",
-                        //location: event.xy,
-                        map: map,
-                        location: new OpenLayers.Geometry.Point(
-                        	map.getLonLatFromPixel(event.xy).lon,
-                        	map.getLonLatFromPixel(event.xy).lat),
-                        lonlat: map.getLonLatFromPixel(event.xy),
-                        width: 200,
-                        height: 200,
-                        autoScroll: true,
-                        collapsible: true,
-                        bodyStyle: {padding: 5},                        
-                        html: text
-                    });                    
-                    popup.show();
-                }
-            });    
-        
-    var btnPopup = new OpenLayers.Control.Button({
-    	displayClass: 'first', 
-    	type: OpenLayers.Control.TYPE_TOGGLE, 
-    	eventListeners: {
-    		'activate': function(){info.activate()}, 
-    		'deactivate': function(){
-			    	popup.destroy();
-			    	info.deactivate();
-    			}
-    	}});
-    panelPopup.addControls([btnPopup]);
-}
-
-
-function infoPopup2() {
-	var info1, panel, popup;
-	var panelPopup = new OpenLayers.Control.Panel({
-		displayClass : 'first'
+function infoPopup(panelCtl) {
+	var info1, panel, popup, btnPopup;	
+	info1 = new OpenLayers.Control.WMSGetFeatureInfo({
+		infoFormat : 'application/vnd.ogc.gml',
+		title : 'Información',
+		queryVisible : true
 	});
-	map.addControl(panelPopup);
-		info1 = new OpenLayers.Control.WMSGetFeatureInfo({
-			infoFormat : 'application/vnd.ogc.gml',
-			title : 'Información',
-			queryVisible : true	
-		});
-		map.addControl(info1);
-		// register a listener for the getfeatureinfo event on the control
-		info1.events.on({
-			getfeatureinfo : function(info) {
-                var features = info.features;
-                var layersStr = "<ul id='tapi'>";
-                var model = [];
-                var attributes = {};
-                var nomLayer = "";
-				layersStr += "<li style='font-size:10px;'><a href='#'> No existen datos para consultar </a></li>";
-				if (features.length > 0) {
-				for (var i=0; i<features.length ;i++) {
+	map.addControl(info1);
+	// register a listener for the getfeatureinfo event on the control
+	info1.events.on({
+		getfeatureinfo : function(info) {
+			if(popup)
+				popup.destroy();
+			
+			var features = info.features;
+			var layersStr = "<ul id='tapi'>";
+			var model = [];
+			var attributes = {};
+			var nomLayer = "";
+			layersStr += "<li style='font-size:10px;'><a href='#'> No existen datos para consultar </a></li>";
+			if (features.length > 0) {
+				for (var i = 0; i < features.length; i++) {
 					attributes = features[i].attributes;
-                    var row = [];
+					var row = [];
 					row.push(features[i].fid);
 					for (var key in attributes) {
-                        var data = features[i].attributes[key];
-                        row.push(key);						
+						var data = features[i].attributes[key];
+						row.push(key);
 						row.push(data);
-                    }
-                    model.push(row);
-                }		
-				
-                layersStr = "<ul id='tapi'>";
-				row="";
-                for (i = 0; i < model.length; i++) {
-                    row += "<li><a href='#'>"+cleanNameLayer(model[i][0])+"</a><ul>";
-                    //var row2 = model[i+1];
-					for (var j = 1; j < model[i].length; j=j+2) {
-						var cod = model[i][j].slice(0,3);	
-					if((cod != "cod") && (cod != "COD") && model[i][j+1] != null){	
+					}
+					model.push(row);
+				}
+
+				layersStr = "<ul id='tapi'>";
+				row = "";
+				for ( i = 0; i < model.length; i++) {
+					row += "<li><a href='#'>" + cleanNameLayer(model[i][0]) + "</a><ul>";
+					//var row2 = model[i+1];
+					for (var j = 1; j < model[i].length; j = j + 2) {
+						var cod = model[i][j].slice(0, 3);
+						if ((cod != "cod") && (cod != "COD") && model[i][j + 1] != null) {
 							//if(cod != "cod" && cod != "COD"){
-                        		row += "<li><a href='#'><b style='min-width:70px;text-transform:capitalize;'>";
-                        		row += model[i][j];
-                        		row += ": </b>";
-                        		row += model[i][j+1];
-                        		row += "</a></li>";
+							row += "<li><a href='#'><b style='min-width:70px;text-transform:capitalize;'>";
+							row += model[i][j];
+							row += ": </b>";
+							row += model[i][j + 1];
+							row += "</a></li>";
 							//}
 						}
-                    }
-                    row += "</ul></li>";
-                }				
-				
-				layersStr += row+"</ul>";				
+					}
+					row += "</ul></li>";
 				}
-				
-				
-				popup = new GeoExt.Popup({
-					title : "GeoBolivia",
-					//location: event.xy,
-					map : map,
-					location : new OpenLayers.Geometry.Point(map.getLonLatFromPixel(info.xy).lon, map.getLonLatFromPixel(info.xy).lat),
-					lonlat : map.getLonLatFromPixel(info.xy),
-					autoScroll : true,
-					collapsible : true,
-					bodyStyle : {
-						padding : 0
-					},
-					html : layersStr
-				});
-				popup.show();
+				layersStr += row + "</ul>";
 			}
-		});		//		featureInfo();
-	//}
-	
+			popup = new GeoExt.Popup({
+				title : "GeoBolivia",
+				//location: event.xy,
+				map : map,
+				location : new OpenLayers.Geometry.Point(map.getLonLatFromPixel(info.xy).lon, map.getLonLatFromPixel(info.xy).lat),
+				lonlat : map.getLonLatFromPixel(info.xy),
+				autoScroll : true,
+				collapsible : true,
+				bodyStyle : {
+					padding : 0
+				},
+				html : layersStr
+			});
+			popup.show();
+		}
+	});
 	var btnPopup = new OpenLayers.Control.Button({
-		displayClass : 'first',
+		displayClass : 'info',
 		type : OpenLayers.Control.TYPE_TOGGLE,
+		title: 'Información',
 		eventListeners : {
-			'activate' : function() {
-				info1.activate()
+			'activate' : function() {				
+				info1.activate();
+				map.controls[12].deactivate();
+				map.controls[13].deactivate();			
 			},
 			'deactivate' : function() {
-				for (var i=0; i<map.popups.length; i++) {
-				    map.removePopup(map.popups[i]);
-				  popup.destroy();
-				 }
-				//popup.destroy();
+				if(popup)
+					popup.destroy();
 				info1.deactivate();
 			}
 		}
 	});
-	panelPopup.addControls([btnPopup]);
+	return (btnPopup);
 }
 
-
-function cleanNameLayer(nom){
-	var t=0;
-	var name="";
-	var c = nom.charAt(t);	
-	while(c != "." && t <= nom.length){
+function cleanNameLayer(nom) {
+	var t = 0;
+	var name = "";
+	var c = nom.charAt(t);
+	while (t <= nom.length) {
 		name += c;
 		t++;
-		c = nom.charAt(t);	
+		c = nom.charAt(t);
 	}
-	name = name.replace(/_/g," ");
+	name = name.replace(/_/g, " ");
+	name = name.replace("Base Layer", "Fondos de Mapa");
 	return name;
 }
+
+/**
+ * Cambia el contenido de Bse Layer y Overlayers
+ **/
+function changeTitle() {
+	var cont = document.getElementById("cbp-spmenu-s2");
+	var tit = cont.getElementsByTagName("div");
+	var row = tit[0].getElementsByTagName("div");
+	row[0].textContent = "Fondos de Mapa";
+	row[2].textContent = "Capas";
+}
+/**
+ * Fullscreen
+ */
+function btnFullScreen (){
+	var btnFs = new OpenLayers.Control.Button({
+		displayClass : 'fs',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		title:'Pantalla Completa',
+		eventListeners : {
+			'activate' : function() {				
+				fullScreen(document.URL)
+			},
+			'deactivate' : function() {				
+				this.deactivate();
+			}
+		}
+	});	
+	return btnFs
+}
+
+function fullScreen(url) {
+	url = url.replace(/#/g, '&');
+	var options = ("toolbar=no, location=no, directories=no, status=no, menubar=no, witdh=100%, resizable=no, fullscreen=yes, scrollbars=auto");
+	window.open(url+"&fs=1", "Visualizador - GeoBolivia", options);
+}
+
+function verifyFullScreen(panel) {
+	var btnFs = null, wrapper_fs, main2;	
+	if (getUrlParameter('fs') != null) {
+		// Maximizamos la pantalla
+		window.moveTo(0, 0);
+		if (document.all) {
+			top.window.resizeTo(screen.availWidth, screen.availHeight);
+		} else if (document.layers || document.getElementById) {
+			if (top.window.outerHeight < screen.availHeight || top.window.outerWidth < screen.availWidth) {
+				top.window.outerHeight = screen.availHeight;
+				top.window.outerWidth = screen.availWidth;
+			}
+		}
+		
+		// Elimina el botón de pantalla completa		
+		wrapper_fs = document.getElementById('wrapper_fullscreen');
+		main2 = document.getElementById('main2');
+		wrapper_fs.removeChild(main2);
+		
+		// Creamos e insertamos botón de salir
+		btnFs = new OpenLayers.Control.Button({
+		displayClass : 'closeFs',
+		title: 'SALIR',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		eventListeners : {
+				'activate' : function() {				
+					window.close();
+				},
+				'deactivate' : function() {
+				}
+			}
+		});		
+		panel.addControls([btnFs]);
+	}
+}
+
 // main
 init = function() {
 	var conf;
 	OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0;
-    // make OL compute scale according to WMS spec
-    //OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+	// make OL compute scale according to WMS spec
+	OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 	conf = new Configuration();
 	OpenLayers.ProxyHost = conf.proxy;
-	conf.getUrlParameters();
-	createLayout(conf);
-	createMap(conf);
-	if(conf.infoLayer){
-		infoPopup2();	
-	}
-	
-	//menu de capas
-	//map.addControl(new OpenLayers.Control.LayerSwitcher({'baseLblTitle':"Capas Base",'dataLblTitle':"Datos"}));
+	conf.getUrlParameters();	
+	createMap(conf);	
 };
 
 window.onload = init;
-
-/*}());*/
