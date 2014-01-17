@@ -82,90 +82,99 @@ body {
 #icons .olButton:hover {
 	background: none repeat scroll rgba(255, 255, 255, 0.1);
 	border-radius: 8px;
+	cursor: pointer;
 	
 }
 /**
  * 	Vista inicial
  */
-#icons .olControlZoomToMaxExtentItemInactive,
-#icons .olControlZoomToMaxExtentItemActive {
-    background-image: url("img/icon-world.png") !important;
+#icons .olControlZoomToMaxExtentItemInactive {
+    background-image: url("img/icon-world-off.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
 }
+#icons .olControlZoomToMaxExtentItemActive,
 #icons .olControlZoomToMaxExtentItemInactive:hover,
 #icons .olControlZoomToMaxExtentItemActive:hover {
-    background-image: url("img/icon-world.png") !important;
+    background-image: url("img/icon-world-on.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
 
 /**
  * 	Move
  */
-#icons .panItemInactive, #icons .panItemInactive:hover {
+#icons .panItemInactive:hover, #icons .panItemInactive{
 	background-image: url("img/icon-move-off.png");
 	background-repeat: no-repeat;
 	background-position:center;
 }
+
 #icons .panItemActive, #icons .panItemActive:hover {
 	background-image: url("img/icon-move-on.png");
 	background-repeat: no-repeat;
-	background-position:center;		
+	background-position:center;	
+	cursor: pointer;	
 }
 
 /**
  * 	Zoom
  */
-#icons .olControlZoomInItemInactive,
-#icons .olControlZoomInItemActive {
-    background-image: url("img/icon-zoomin.png") !important;
+#icons .olControlZoomInItemInactive{
+    background-image: url("img/icon-zoomin-off.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
 }
+#icons .olControlZoomInItemActive, 
 #icons .olControlZoomInItemActive:hover,
 #icons .olControlZoomInItemInactive:hover {
-    background-image: url("img/icon-zoomin.png") !important;
+    background-image: url("img/icon-zoomin-on.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
 
-#icons .olControlZoomOutItemInactive,
-#icons .olControlZoomOutItemActive {
-    background-image: url("img/icon-zoomout.png") !important;
+#icons .olControlZoomOutItemInactive{
+    background-image: url("img/icon-zoomout-off.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
 }
+#icons .olControlZoomOutItemActive,
 #icons .olControlZoomOutItemActive:hover,
 #icons .olControlZoomOutItemInactive:hover {
-    background-image: url("img/icon-zoomout.png") !important;
+    background-image: url("img/icon-zoomout-on.png") !important;
     background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
 
 /**
  * 	Measure
  */
-#icons .pathItemInactive, #icons .pathItemInactive:hover {
+#icons .pathItemInactive{
 	background-image: url("img/icon-distance-off.png");
 	background-repeat: no-repeat;
 	background-position:center;
 }
- 
+ #icons .pathItemInactive:hover, 
 #icons .pathItemActive, #icons .pathItemActive:hover {
 	background-image: url("img/icon-distance-on.png");
 	background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
-#icons .polygonItemInactive, #icons .polygonItemInactive:hover {
+#icons .polygonItemInactive{
 	background-image: url("img/icon-area-off.png");
 	background-repeat: no-repeat;
 	background-position:center;
 }
+#icons .polygonItemInactive:hover, 
 #icons .polygonItemActive, #icons .polygonItemActive:hover {
 	background-image: url("img/icon-area-on.png");	
 	background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
 
 /**
@@ -175,53 +184,57 @@ body {
 	background-image: url("img/icon-previous-off.png");
 	background-repeat: no-repeat;
 	background-position:center;
+	cursor: pointer;
 }
 #icons .histPreviousItemActive, #icons .histPreviousItemActive:hover {
 	background-image: url("img/icon-previous-on.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 #icons .histNextItemInactive, #icons .histNextItemInactive:hover {
 	background-image: url("img/icon-next-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 #icons .histNextItemActive, #icons .histNextItemActive:hover {
 	background-image: url("img/icon-next-on.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 
 /**
  * 	Info
  */
-#icons .infoItemInactive, #icons .infoItemInactive:hover {
+#icons .infoItemInactive{
 	background-image: url("img/icon-info-off.png");
 	background-repeat: no-repeat;
 	background-position:center;
 }
-
+#icons .infoItemInactive:hover, 
 #icons .infoItemActive, #icons .infoItemActive:hover {
 	background-image: url("img/icon-info-on.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 
 /**
  * 	Fullscreen
  */
-#icons .fsItemInactive, #icons .fsItemInactive:hover {
+#icons .fsItemInactive {
 	background-color: transparent;
-	background-image: url("img/icon-full-screen.png");		
+	background-image: url("img/icon-fullscreen-on.png");		
 	background-repeat: no-repeat;
 	background-position:center;
 }
+#icons .fsItemInactive:hover,
 #icons .fsItemActive, #icons .fsItemActive:hover {
 	background-color: transparent;
-	background-image: url("img/icon-full-screen.png");		
+	background-image: url("img/iconfullscreen-on.png");		
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
+
+
 
 /**
  * 	Salir
@@ -236,13 +249,13 @@ body {
 	background-color: transparent;
 	background-image: url("img/icon-close2.png");		
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 #icons .closeFsItemActive, #icons .closeFsItemActive:hover{
 	background-color: transparent;
 	background-image: url("img/icon-close2.png");		
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position:center;cursor: pointer;
 }
 
 
@@ -522,6 +535,13 @@ body {
     border-bottom: 1px dotted #999999;    
     text-align: left;
 }
+
+.color-user{
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+
+
 
 
 

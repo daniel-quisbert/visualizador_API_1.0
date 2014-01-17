@@ -70,8 +70,8 @@ function Configuration() {
 	this.infoLayer = false;
 	this.bgmap = "";
 	this.bgmap2 = "";
-	//this.proxy = "/proxy/?url=";
-	this.proxy = "/cgi-bin/proxy.cgi?url=";
+	this.proxy = "/proxy/?url=";
+	//this.proxy = "/cgi-bin/proxy.cgi?url=";
 	this.zdakar = '0';
 	// zdakar: variable sólo para los mapas del DAKAR
 }
@@ -208,7 +208,7 @@ function createTools(conf) {
 		/* Add to map */		
 		map.addControl(navCtl);		
 			
-		lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
+		/*lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
 			title: "Distancia",
 			persist : true,
 			immediate : true,
@@ -227,26 +227,97 @@ function createTools(conf) {
 		areaMeasureCtl.events.on({
 			"measure" : handleAreaMeasure,
 			"measurepartial" : handleAreaMeasure
-		});
-		panelCtl.addControls([new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
+		});*/
+		panelCtl.addControls([
+			new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
 			navCtl.previous, 
-			navCtl.next, 
+			navCtl.next,			
 			fakePanCtl,
 			new OpenLayers.Control.ZoomIn({title: "Acercarse"}),
-        	new OpenLayers.Control.ZoomOut({title: "Alejarse"}),
-        	lineMeasureCtl, 
-        	areaMeasureCtl]);	
-		
+        	new OpenLayers.Control.ZoomOut({title: "Alejarse"})
+        	
+        	]);
+		panelCtl.addControls([
+			createBotonDistance(),
+        	createBotonArea()			
+		]);
 		/*  Se crea el botón 'i' para mostrar la informacón de las capas en un popup
 		 **/			
 		if (conf.infoLayer) {
 			btnInfo = infoPopup(panelCtl);
 			panelCtl.addControls([btnInfo]);
-		}		
-		verifyFullScreen(panelCtl);
+		}
 		map.addControl(panelCtl);
-		
+		verifyFullScreen(panelCtl);
 	//}
+}
+
+
+function createBotonDistance(){
+	var lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
+					//title: "Distancia",
+					persist : true,
+					immediate : true,
+					//displayClass : 'path'
+				});
+	map.addControl(lineMeasureCtl);
+	lineMeasureCtl.events.on({			
+					"measure" : handleLineMeasure,
+					"measurepartial" : handleLineMeasure
+				});	
+				
+	var btn = new OpenLayers.Control.Button({
+		displayClass : 'path',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		title: 'Distancia',
+		eventListeners : {
+			'activate' : function() {
+						map.controls[15].deactivate();
+						map.controls[16].deactivate();
+						lineMeasureCtl.activate();
+						var m = document.getElementById('measure');				
+						m.style.display = 'block';
+				},
+			'deactivate' : function() {
+				lineMeasureCtl.deactivate();
+				//map.controls[14].deactivate();
+			}
+		}
+	});
+	return btn;
+}
+function createBotonArea(){
+	var areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
+			//title: "Área",
+			persist : true,
+			immediate : true,
+			//displayClass : 'polygon'
+		});
+		map.addControl(areaMeasureCtl);
+		areaMeasureCtl.events.on({
+			"measure" : handleAreaMeasure,
+			"measurepartial" : handleAreaMeasure
+		});
+				
+	var btn = new OpenLayers.Control.Button({
+		displayClass : 'polygon',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		title: 'Área',
+		eventListeners : {
+			'activate' : function() {
+						map.controls[14].deactivate();
+						map.controls[16].deactivate();
+						areaMeasureCtl.activate();
+						var m = document.getElementById('measure');				
+						m.style.display = 'block';
+				},
+			'deactivate' : function() {
+				areaMeasureCtl.deactivate();
+				//map.controls[15].deactivate();
+			}
+		}
+	});
+	return btn;
 }
 
 /**
@@ -360,12 +431,18 @@ function loadWmc(conf, protocol) {
 			// z: nivel de ZOOM para los mapas
 			b = context.bounds;
 			if (conf.zdakar != "0") {
-				if (conf.zdakar == "5") {
-					z = 8;
-				} else {
-					z = 16;
-				}
-				b = boundZdakar(conf.zdakar);
+				if (conf.zdakar == "6") {
+                    z = 15;
+                } 
+                else {
+                    z = 16;
+                }
+                if (conf.zdakar == "5") {
+                    z = 8;
+                } 
+
+                b = boundZdakar(conf.zdakar);
+
 			}
 			map.setCenter(b.getCenterLonLat(), z);
 			// fondo de mapa con zoom de acuerdo a los boundingbox
@@ -410,6 +487,10 @@ function boundZdakar(zd) {
 			// Bounds Regiónwa
 			b = new OpenLayers.Bounds(-7676501.00000000, -2633883.00000000, -7248100.00000000, -2138282.00000000);
 			break;
+		case "6":
+            // Bounds 
+            b = new OpenLayers.Bounds(-7585697.00000000, -1865388.00000000, -7582232.00000000, -1861229.00000000);
+            break;
 	}
 	return b;
 }
@@ -615,10 +696,14 @@ function infoPopup(panelCtl) {
 		type : OpenLayers.Control.TYPE_TOGGLE,
 		title: 'Información',
 		eventListeners : {
-			'activate' : function() {				
+			'activate' : function(){
 				info1.activate();
-				map.controls[12].deactivate();
-				map.controls[13].deactivate();			
+				map.controls[14].deactivate();
+				map.controls[15].deactivate();
+				
+				var m = document.getElementById('measure');				
+				m.style.display = 'none';
+						
 			},
 			'deactivate' : function() {
 				if(popup)
@@ -640,17 +725,17 @@ function cleanNameLayer(nom) {
 		c = nom.charAt(t);
 	}
 	name = name.replace(/_/g, " ");
-	name = name.replace("Base Layer", "Fondos de Mapa");
+	name = name.replace(/"BASE LAYER"/g, "Fondos de Mapa");
 	return name;
 }
 
 /**
  * Cambia el contenido de Bse Layer y Overlayers
  **/
-function changeTitle() {
-	var cont = document.getElementById("cbp-spmenu-s2");
+function changeTitle() {	
+	var cont = document.getElementById("content_legend");
 	var tit = cont.getElementsByTagName("div");
-	var row = tit[0].getElementsByTagName("div");
+	var row = tit[0].getElementsByTagName("div");		
 	row[0].textContent = "Fondos de Mapa";
 	row[2].textContent = "Capas";
 }
@@ -725,7 +810,8 @@ init = function() {
 	conf = new Configuration();
 	OpenLayers.ProxyHost = conf.proxy;
 	conf.getUrlParameters();	
-	createMap(conf);	
+	createMap(conf);
+	changeTitle();	
 };
 
 window.onload = init;

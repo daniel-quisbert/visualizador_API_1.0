@@ -7,7 +7,8 @@
 }
 
 .baseLayersDiv, .baseLbl{
-	background-color: rgba(0, 0, 0, 0.55);
+	border-top: 1px solid rgba(0, 0, 0, 0.8);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.8);
 }
 .baseLayersDiv{
 	padding-bottom: 5px;
@@ -22,7 +23,7 @@
 
 /* General styles for all menus */
 .cbp-spmenu {
-	background-color: rgba(0, 0, 0, 0.8);	
+	background-color: rgba(0, 0, 0, 0.8);
 	position: fixed;
 	color: #fff;
 	list-style:none;	
@@ -247,4 +248,7 @@
 	.cbp-spmenu-push-toright {
 		left: 190px;
 	}
+}
+#content_legend{
+	margin-left: 8px;
 }
