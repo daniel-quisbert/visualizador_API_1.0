@@ -38,14 +38,11 @@
  */
 .main2{
 	position:absolute;
-	top: 390px;
+	top: 410px;
 	z-index: 1200;
-	width: 40px;
-	height: 40px;
-	margin-left: 50%;
-	margin-right: 50%;
-	left: -19px;
-	right: -20px;	
+	width: 38px;
+	height: 38px;
+	left: 6px;	
 }
 .main2:hover{
 	background: none repeat scroll rgba(255, 255, 255, 0.1);
@@ -67,8 +64,8 @@
 }
 .main2 > section button {		
 	position: absolute;	
-	width: 40px;
-	height: 40px;	
+	width: 38px;
+	height: 38px;	
 	z-index: 1200;
 	border:none;
 	padding-left: 20px;
@@ -82,9 +79,14 @@
 /**
  * 	Fullscreen
  */
-.main2 > section button:hover {	
-	background-image: url("../img/icon-fullscreen-on.png");
+.main2 > section button:hover {
+	background-repeat: no-repeat;
+	background-position:center;
 	cursor: pointer;
+	background: none repeat scroll rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.6);
+	border-radius: 6px;
+	background-image: url("../img/icon-fullscreen-on.png");	
 }
 
 .main2 > section button.active {
@@ -94,13 +96,6 @@
 .main2 > section button.disabled {
 	background-image: url("../img/icon-fullscreen-off.png");
 }
-/***************************/
-#showRight{	
-	background-image: url("../img/icon-legend.png");		
-	background-repeat: no-repeat;	
-	border-radius: 4px;	
-}
-
 
 #shutdown{
 	background-color: #000; 

@@ -94,22 +94,56 @@
 	/*padding: 0.7em;*/
 }
 /*********************/
-.cbp-spmenu-vertical #showRight{		
+.secLegend{
 	position: absolute;	
+	top:0px;
 	width: 40px;
-	height: 40px;
 	margin-left: -40px;
-	z-index: 1100;		
-	border: none;	
+	height: 40px;
+	z-index: 1100;
+	border: none;
 	background: none repeat scroll rgba(0, 0, 0, 0.8);
-	cursor: pointer;
-	background-image: url("../img/icon-legend.png");		
+	cursor: pointer;	
+			
 	background-repeat: no-repeat;	
-	border-radius: 8px 0 0 8px;	
+	border-radius: 8px 0 0 8px;
+}
+.cbp-spmenu-vertical .secLegend .showRight{		
+	position: relative;
+	z-index: 1100;
+	
+	width: 36px;	
+	height: 36px;
+	margin-top:2px;
+	margin-left:2px;
+	border: none;	
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url("../img/icon-legend.png");
+}
+.cbp-spmenu-vertical .secLegend .showRight.active{		
+	position: absolute;	
+	width: 36px;
+	height: 36px;
+	margin-top:2px;
+	margin-left:2px;
+	z-index: 1100;
+	border: none;
+	
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url("../img/icon-back-legend.png");		
+	
+	
+	 -moz-animation: fadeInScale 1.2s ease-in-out;
+    -webkit-animation: fadeInScale 1.2s ease-in-out;
+    -o-animation: fadeInScale 1.2s ease-in-out;
+    -ms-animation: fadeInScale 1.2s ease-in-out;
+    animation: fadeInScale 1.2s ease-in-out;
 }
 
 
-.cbp-spmenu-vertical #showLeft{
+.secTools{
 	position:absolute;	
 	width: 40px;
 	height: 40px;
@@ -119,13 +153,54 @@
 	z-index: 1100;		
 	border: none;	
 	background: none repeat scroll rgba(0, 0, 0, 0.8);
-	cursor: pointer;		
-
-	background-image: url("../img/icon-tools.png");		
+	cursor: pointer;
+		
 	background-repeat: no-repeat;	
 	border-radius: 0 8px 8px 0	;
 	float: left;
 }
+
+.cbp-spmenu-vertical .secTools .showLeft{
+	position:absolute;	
+	width: 36px;
+	height: 36px;
+	top: 0px;
+	margin-right: 2px;
+	margin-top: 2px;
+	z-index: 1100;		
+	border: none;	
+	
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url("../img/icon-tools.png");		
+	background-repeat: no-repeat;	
+	
+}
+.cbp-spmenu-vertical .secTools .showLeft.active{
+	position:absolute;	
+	width: 36px;
+	height: 36px;
+	top: 0px;
+	margin-right: 2px;
+	margin-top: 2px;
+	z-index: 1100;		
+	border: none;		
+	
+	cursor: pointer;
+	background-color: transparent;
+	background-image: url("../img/icon-back-tools.png");		
+	background-repeat: no-repeat;	
+	
+	-moz-animation: fadeInScale 1.2s ease-in-out;
+    -webkit-animation: fadeInScale 1.2s ease-in-out;
+    -o-animation: fadeInScale 1.2s ease-in-out;
+    -ms-animation: fadeInScale 1.2s ease-in-out;
+    animation: fadeInScale 1.2s ease-in-out;
+}
+
+
+
+
 /*********************************/
 .cbp-spmenu-horizontal {	
 	width: 100%;
@@ -252,3 +327,5 @@
 #content_legend{
 	margin-left: 8px;
 }
+
+

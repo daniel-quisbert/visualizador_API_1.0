@@ -70,8 +70,8 @@ function Configuration() {
 	this.infoLayer = false;
 	this.bgmap = "";
 	this.bgmap2 = "";
-	this.proxy = "/proxy/?url=";
-	//this.proxy = "/cgi-bin/proxy.cgi?url=";
+	//this.proxy = "/proxy/?url=";
+	this.proxy = "/cgi-bin/proxy.cgi?url=";
 	this.zdakar = '0';
 	// zdakar: variable sólo para los mapas del DAKAR
 }
@@ -183,8 +183,9 @@ function handleAreaMeasure(event) {
  * Fill the #tools <div>
  */
 function createTools(conf) {
-	var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl, areaMeasureCtl, btnInfo, btnFs;
-
+	var tools, icons, measure, panelCtl, fakePanCtl, navCtl, lineMeasureCtl, areaMeasureCtl;
+	
+	hiddenMeasure();
 	tools = document.getElementById('tools');
 	icons = document.getElementById('icons');
 	measure = document.getElementById('measure');
@@ -204,61 +205,45 @@ function createTools(conf) {
 		panelCtl = new OpenLayers.Control.Panel({
 			'div' : icons,
 			'defaultControl' : fakePanCtl
+			//autoActivate: true
 		});		
 		/* Add to map */		
-		map.addControl(navCtl);		
-			
-		/*lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
-			title: "Distancia",
-			persist : true,
-			immediate : true,
-			displayClass : 'path'
-		});
-		lineMeasureCtl.events.on({			
-			"measure" : handleLineMeasure,
-			"measurepartial" : handleLineMeasure
-		});	
-		areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
-			title: "Área",
-			persist : true,
-			immediate : true,
-			displayClass : 'polygon'
-		});
-		areaMeasureCtl.events.on({
-			"measure" : handleAreaMeasure,
-			"measurepartial" : handleAreaMeasure
-		});*/
+		map.addControl(navCtl);
+		
 		panelCtl.addControls([
 			new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
 			navCtl.previous, 
 			navCtl.next,			
 			fakePanCtl,
 			new OpenLayers.Control.ZoomIn({title: "Acercarse"}),
-        	new OpenLayers.Control.ZoomOut({title: "Alejarse"})
-        	
+        	new OpenLayers.Control.ZoomOut({title: "Alejarse"}),
+        	createBotonDistance(),
+        	createBotonArea()
         	]);
-		panelCtl.addControls([
-			createBotonDistance(),
-        	createBotonArea()			
-		]);
+		
 		/*  Se crea el botón 'i' para mostrar la informacón de las capas en un popup
 		 **/			
-		if (conf.infoLayer) {
-			btnInfo = infoPopup(panelCtl);
-			panelCtl.addControls([btnInfo]);
+		if (conf.infoLayer) {			
+			panelCtl.addControls([infoPopup()]);
 		}
 		map.addControl(panelCtl);
-		verifyFullScreen(panelCtl);
+		verifyFullScreen(panelCtl);						
+		
 	//}
 }
-
+function hiddenMeasure(){
+	// Ocultamos el contenedor Measure	
+	document.getElementById('measure').style.display = 'none';
+}
+function showMeasure(){
+	// Mostramos el contenedor Measure	
+	document.getElementById('measure').style.display = 'block';
+}
 
 function createBotonDistance(){
-	var lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {
-					//title: "Distancia",
+	var lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {					
 					persist : true,
-					immediate : true,
-					//displayClass : 'path'
+					immediate : true,					
 				});
 	map.addControl(lineMeasureCtl);
 	lineMeasureCtl.events.on({			
@@ -272,26 +257,28 @@ function createBotonDistance(){
 		title: 'Distancia',
 		eventListeners : {
 			'activate' : function() {
-						map.controls[15].deactivate();
-						map.controls[16].deactivate();
+						if(map.controls[15]){
+							map.controls[15].deactivate();
+							map.controls[16].deactivate();
+						}	
+						else{					
+							map.controls[14].deactivate();
+						}
 						lineMeasureCtl.activate();
-						var m = document.getElementById('measure');				
-						m.style.display = 'block';
+						showMeasure();
 				},
 			'deactivate' : function() {
 				lineMeasureCtl.deactivate();
-				//map.controls[14].deactivate();
+				hiddenMeasure();				
 			}
 		}
 	});
 	return btn;
 }
 function createBotonArea(){
-	var areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {
-			//title: "Área",
+	var areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {			
 			persist : true,
-			immediate : true,
-			//displayClass : 'polygon'
+			immediate : true,			
 		});
 		map.addControl(areaMeasureCtl);
 		areaMeasureCtl.events.on({
@@ -305,15 +292,19 @@ function createBotonArea(){
 		title: 'Área',
 		eventListeners : {
 			'activate' : function() {
-						map.controls[14].deactivate();
-						map.controls[16].deactivate();
+						if(map.controls[15]){
+							map.controls[14].deactivate();
+							map.controls[16].deactivate();
+						}	
+						else{					
+							map.controls[13].deactivate();				
+						}
 						areaMeasureCtl.activate();
-						var m = document.getElementById('measure');				
-						m.style.display = 'block';
+						showMeasure();
 				},
 			'deactivate' : function() {
 				areaMeasureCtl.deactivate();
-				//map.controls[15].deactivate();
+				hiddenMeasure();				
 			}
 		}
 	});
@@ -495,25 +486,6 @@ function boundZdakar(zd) {
 	return b;
 }
 
-/**
- * Verifica si los bounds son los de la región
- * */
-function searchBounds(bounds) {
-	var resp = false, c = 0;
-	var s = [-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022, -7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987, -7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002, -7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993];
-	for (var j = 0; j < 5; j++) {
-		for (var i = 0; i < s.length; i++) {
-			if (bounds[j] == parseFloat(s[i]).toFixed(7)) {
-				c++;
-			}
-		}
-	}
-	if (c > 2) {
-		resp = true;
-	}
-	return resp;
-}
-
 function extendOsmGoogle(extendMap) {
 	var nx, a;
 	a = extendMap.toArray();
@@ -621,7 +593,7 @@ function createMap(conf) {
  *  que muestra la información del lugar en un popup
  */
 
-function infoPopup(panelCtl) {
+function infoPopup() {
 	var info1, panel, popup, btnPopup;	
 	info1 = new OpenLayers.Control.WMSGetFeatureInfo({
 		infoFormat : 'application/vnd.ogc.gml',
@@ -632,8 +604,8 @@ function infoPopup(panelCtl) {
 	// register a listener for the getfeatureinfo event on the control
 	info1.events.on({
 		getfeatureinfo : function(info) {
-			if(popup)
-				popup.destroy();
+			//if(popup)
+			//	popup.destroy();
 			
 			var features = info.features;
 			var layersStr = "<ul id='tapi'>";
@@ -658,17 +630,16 @@ function infoPopup(panelCtl) {
 				row = "";
 				for ( i = 0; i < model.length; i++) {
 					row += "<li><a href='#'>" + cleanNameLayer(model[i][0]) + "</a><ul>";
-					//var row2 = model[i+1];
+					
 					for (var j = 1; j < model[i].length; j = j + 2) {
 						var cod = model[i][j].slice(0, 3);
 						if ((cod != "cod") && (cod != "COD") && model[i][j + 1] != null) {
-							//if(cod != "cod" && cod != "COD"){
+							
 							row += "<li><a href='#'><b style='min-width:70px;text-transform:capitalize;'>";
 							row += model[i][j];
 							row += ": </b>";
 							row += model[i][j + 1];
 							row += "</a></li>";
-							//}
 						}
 					}
 					row += "</ul></li>";
@@ -697,18 +668,16 @@ function infoPopup(panelCtl) {
 		title: 'Información',
 		eventListeners : {
 			'activate' : function(){
-				info1.activate();
+				hiddenMeasure();
 				map.controls[14].deactivate();
 				map.controls[15].deactivate();
-				
-				var m = document.getElementById('measure');				
-				m.style.display = 'none';
-						
+				info1.activate();
 			},
 			'deactivate' : function() {
 				if(popup)
 					popup.destroy();
 				info1.deactivate();
+				
 			}
 		}
 	});
@@ -725,7 +694,7 @@ function cleanNameLayer(nom) {
 		c = nom.charAt(t);
 	}
 	name = name.replace(/_/g, " ");
-	name = name.replace(/"BASE LAYER"/g, "Fondos de Mapa");
+	//name = name.replace(/"BASE LAYER"/g, "Fondos de Mapa");
 	return name;
 }
 
@@ -738,25 +707,6 @@ function changeTitle() {
 	var row = tit[0].getElementsByTagName("div");		
 	row[0].textContent = "Fondos de Mapa";
 	row[2].textContent = "Capas";
-}
-/**
- * Fullscreen
- */
-function btnFullScreen (){
-	var btnFs = new OpenLayers.Control.Button({
-		displayClass : 'fs',
-		type : OpenLayers.Control.TYPE_TOGGLE,
-		title:'Pantalla Completa',
-		eventListeners : {
-			'activate' : function() {				
-				fullScreen(document.URL)
-			},
-			'deactivate' : function() {				
-				this.deactivate();
-			}
-		}
-	});	
-	return btnFs
 }
 
 function fullScreen(url) {

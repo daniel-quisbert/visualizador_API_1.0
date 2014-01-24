@@ -18,11 +18,11 @@ body {
 }
 
 #tools {
-	position: absolute;	
+	position: relative;	
 	z-index: 1200;
 	background-color: transparent;
 	/*background: none repeat scroll rgba(0, 0, 0, 1);*/
-	top: 40px;	
+	top: 44px;	
 	width: 50px;
 	height: 100%;
 			
@@ -54,37 +54,78 @@ body {
 #tools #measure {
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0 0 8px 8px;
-	width:185px;
+	width:190px;
+	height: 30px;
 	min-height: 0px;
 	max-height: 40px;
 	position: relative;	
 	left: 92px;
-	top: -41px;
-	padding-top: 1px;
-	padding-bottom: 1px;	
-	text-align: center;
-	font-size: 14px;	
+	top: -43px;
+	padding-top: 8px;		
+	padding-left: 10px;
+	font-size: 1.2em;
+}
+
+/**
+ * 	Shadows box
+ */
+#icons .olControlZoomToMaxExtentItemActive,
+#icons .olControlZoomToMaxExtentItemInactive:hover,
+#icons .olControlZoomToMaxExtentItemActive:hover,
+#icons .panItemInactive:hover,
+#icons .panItemActive, #icons .panItemActive:hover,
+#icons .olControlZoomInItemActive, 
+#icons .olControlZoomInItemActive:hover,
+#icons .olControlZoomInItemInactive:hover,
+#icons .olControlZoomOutItemActive,
+#icons .olControlZoomOutItemActive:hover,
+#icons .olControlZoomOutItemInactive:hover,
+#icons .pathItemInactive:hover, 
+#icons .pathItemActive, #icons .pathItemActive:hover,
+#icons .polygonItemInactive:hover, 
+#icons .polygonItemActive, #icons .polygonItemActive:hover,
+#icons .histPreviousItemInactive:hover,
+#icons .histPreviousItemActive, #icons .histPreviousItemActive:hover,
+#icons .histNextItemInactive:hover,
+#icons .histNextItemActive, #icons .histNextItemActive:hover,
+#icons .infoItemInactive:hover, 
+#icons .infoItemActive, #icons .infoItemActive:hover,
+#icons .fsItemInactive:hover,
+#icons .fsItemActive, #icons .fsItemActive:hover{	
+	background-repeat: no-repeat;
+	background-position:center;
+	cursor: pointer;
+	background: none repeat scroll rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0.15em 0.12em rgba(255, 255, 255, 0.6);
+	border-radius: 6px;
 }
 
 #icons .olButton {
+	z-index: 1401;
+	display: inline-block;
 	position: relative;	
 	background-repeat: no-repeat;
-	height: 40px;
-	width: 40px;	
-	margin-left: 50%;
-	margin-right: 50%;
-	left: -20px;
-	right: -20px;
-	margin-top: 3px;
+	height: 38px;
+	width: 38px;
+	left: 6px;	
+	margin-top: 4px;
+	border-radius: 6px;
 	
+	-moz-transition: color 0.4s ease;
+	-webkit-transition: color 0.4s ease;
+	-o-transition: color 0.4s ease;
 }
-
+/*
 #icons .olButton:hover {
-	background: none repeat scroll rgba(255, 255, 255, 0.1);
-	border-radius: 8px;
+	background-repeat: no-repeat;
+	background-position:center;
 	cursor: pointer;
-	
-}
+	background: none repeat scroll rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.8);
+	border-radius: 6px;
+				
+}*/
+
 /**
  * 	Vista inicial
  */
@@ -96,26 +137,20 @@ body {
 #icons .olControlZoomToMaxExtentItemActive,
 #icons .olControlZoomToMaxExtentItemInactive:hover,
 #icons .olControlZoomToMaxExtentItemActive:hover {
-    background-image: url("img/icon-world-on.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
+    background-image: url("img/icon-world-on.png") !important;    
 }
-
 /**
  * 	Move
  */
-#icons .panItemInactive:hover, #icons .panItemInactive{
+#icons .panItemInactive{
 	background-image: url("img/icon-move-off.png");
-	background-repeat: no-repeat;
+	 background-repeat: no-repeat;
 	background-position:center;
+	
 }
-
+#icons .panItemInactive:hover,
 #icons .panItemActive, #icons .panItemActive:hover {
-	background-image: url("img/icon-move-on.png");
-	background-repeat: no-repeat;
-	background-position:center;	
-	cursor: pointer;	
+	background-image: url("img/icon-move-on.png");	
 }
 
 /**
@@ -128,11 +163,8 @@ body {
 }
 #icons .olControlZoomInItemActive, 
 #icons .olControlZoomInItemActive:hover,
-#icons .olControlZoomInItemInactive:hover {
-    background-image: url("img/icon-zoomin-on.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
+#icons .olControlZoomInItemInactive:hover {	
+    background-image: url("img/icon-zoomin-on.png") !important;   
 }
 
 #icons .olControlZoomOutItemInactive{
@@ -142,11 +174,8 @@ body {
 }
 #icons .olControlZoomOutItemActive,
 #icons .olControlZoomOutItemActive:hover,
-#icons .olControlZoomOutItemInactive:hover {
-    background-image: url("img/icon-zoomout-on.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
+#icons .olControlZoomOutItemInactive:hover {	
+    background-image: url("img/icon-zoomout-on.png") !important;  
 }
 
 /**
@@ -157,12 +186,9 @@ body {
 	background-repeat: no-repeat;
 	background-position:center;
 }
- #icons .pathItemInactive:hover, 
+#icons .pathItemInactive:hover, 
 #icons .pathItemActive, #icons .pathItemActive:hover {
 	background-image: url("img/icon-distance-on.png");
-	background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
 }
 #icons .polygonItemInactive{
 	background-image: url("img/icon-area-off.png");
@@ -170,36 +196,30 @@ body {
 	background-position:center;
 }
 #icons .polygonItemInactive:hover, 
-#icons .polygonItemActive, #icons .polygonItemActive:hover {
+#icons .polygonItemActive, #icons .polygonItemActive:hover {	
 	background-image: url("img/icon-area-on.png");	
-	background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
 }
 
 /**
  * 	Previus - Next
  */
-#icons .histPreviousItemInactive, #icons .histPreviousItemInactive:hover {
+#icons .histPreviousItemInactive {
 	background-image: url("img/icon-previous-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
+	background-position:center;	
 }
-#icons .histPreviousItemActive, #icons .histPreviousItemActive:hover {
-	background-image: url("img/icon-previous-on.png");
-	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+#icons .histPreviousItemInactive:hover,
+#icons .histPreviousItemActive, #icons .histPreviousItemActive:hover {	
+	background-image: url("img/icon-previous-on.png");	
 }
-#icons .histNextItemInactive, #icons .histNextItemInactive:hover {
+#icons .histNextItemInactive {
 	background-image: url("img/icon-next-off.png");
 	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+	background-position:center;
 }
-#icons .histNextItemActive, #icons .histNextItemActive:hover {
-	background-image: url("img/icon-next-on.png");
-	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+#icons .histNextItemInactive:hover,
+#icons .histNextItemActive, #icons .histNextItemActive:hover {	
+	background-image: url("img/icon-next-on.png");	
 }
 
 /**
@@ -211,10 +231,8 @@ body {
 	background-position:center;
 }
 #icons .infoItemInactive:hover, 
-#icons .infoItemActive, #icons .infoItemActive:hover {
-	background-image: url("img/icon-info-on.png");
-	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+#icons .infoItemActive, #icons .infoItemActive:hover {	
+	background-image: url("img/icon-info-on.png");	
 }
 
 /**
@@ -229,12 +247,12 @@ body {
 #icons .fsItemInactive:hover,
 #icons .fsItemActive, #icons .fsItemActive:hover {
 	background-color: transparent;
-	background-image: url("img/iconfullscreen-on.png");		
+	background: none repeat scroll rgba(255, 255, 255, 0.1);
+	background-image: url("img/iconfullscreen-on.png");
+		
 	background-repeat: no-repeat;
 	background-position:center;cursor: pointer;
 }
-
-
 
 /**
  * 	Salir
@@ -253,10 +271,13 @@ body {
 }
 #icons .closeFsItemActive, #icons .closeFsItemActive:hover{
 	background-color: transparent;
-	background-image: url("img/icon-close2.png");		
+	background: none repeat scroll rgba(255, 255, 255, 0.1);
+	background-image: url("img/icon-close2.png");
+	
 	background-repeat: no-repeat;
 	background-position:center;cursor: pointer;
 }
+
 
 
 #icons .close2ItemInactive, #icons .close2ItemInactive:hover{
@@ -323,13 +344,10 @@ body {
   .vmcc3 {
     /*display: inline-block;*/
     position: absolute;
-    height: 40px;
-    width: 40px;
-    top: 0px;
-    margin-left: 50%;
-    margin-right: 50%;
-    left: -20px;
-    right: -20px;
+    height: 38px;
+    width: 38px;
+    top: 2px;
+    left: 6px;
     z-index: 1200;
    
     /*vertical-align:bottom;*/ 
@@ -345,12 +363,13 @@ body {
   	top: 1px; 	
   	}
   .vmcc3 #ico-help:hover {
-  	background-image: url("img/icon-help-hover.png");
-  	background-color: transparent;			
-	background-repeat: no-repeat;
-	background-position:center; 
-  	display: block;
-  	top: 1px; 	
+  	background-repeat: no-repeat;
+	background-position:center;
+	cursor: pointer;
+	background: none repeat scroll rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.6);
+	border-radius: 6px;
+  	background-image: url("img/icon-help-hover.png");  	
   	}
   	
   .vmcc3 > a {position: relative;}
@@ -539,6 +558,7 @@ body {
 .color-user{
 	background-color: rgba(0, 0, 0, 0.8);
 }
+
 
 
 

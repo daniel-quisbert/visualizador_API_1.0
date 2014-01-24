@@ -22,52 +22,52 @@
 					<a href="#text-help" class="vmcerrar" onclick="showToolsLegend();">cerrar</a>
 					<div id="helpFrame" class="popupFrame">
 
-						<strong><h1>Ayuda para el uso de las herramientas</h1></strong>
+						<strong><h1>Como utilizar las herramientas</h1></strong>
 						<table>
 							<tbody>
 								<tr>
-									<td><img class="ico" src="img/icon-world.png" title="Botón Vista Inicial" /></td>
+									<td><img class="ico" src="img/icon-world-on.png" title="Botón Vista Inicial" /></td>
 									<td> Posiciona el mapa a la vista inicial u original. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-previous-off.png" title="Botón Anterior" /></td>
+									<td><img class="ico" src="img/icon-previous-on.png" title="Botón Anterior" /></td>
 									<td> Posiciona el mapa a una vista o emplazamiento anterior. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-next-off.png" title="Botón Siguiente" /></td>
+									<td><img class="ico" src="img/icon-next-on.png" title="Botón Siguiente" /></td>
 									<td> Posiciona el mapa a una vista o emplazamiento posterior. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-move-off.png" title="Botón Mover" /></td>
+									<td><img class="ico" src="img/icon-move-on.png" title="Botón Mover" /></td>
 									<td> Indica que puede mover el mapa en cualquier dirección con la ayuda del mouse. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-zoomin.png" title="Botón Acercamiento" /></td>
+									<td><img class="ico" src="img/icon-zoomin-on.png" title="Botón Acercamiento" /></td>
 									<td> Realiza un acercamiento (zoomin) al interior del mapa.
 									Alternativa: realice doble clik en la zona preferida, o también con la rueda del mouse. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-zoomout.png" title="Botón Anterior" /></td>
+									<td><img class="ico" src="img/icon-zoomout-on.png" title="Botón Anterior" /></td>
 									<td> Realiza un alejamiento (zoomout) al mapa.
 									Alternativa: con la ruefa del mouse. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-distance-off.png" title="Botón Medir Distancias" /></td>
+									<td><img class="ico" src="img/icon-distance-on.png" title="Botón Medir Distancias" /></td>
 									<td> Habilita poder medir distancias entre 2 o más puntos.
 									Uso: realice un click para indicar los primeros puntos y doble click para el punto final a medir. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-area-off.png" title="Botón Medir Áreas" /></td>
+									<td><img class="ico" src="img/icon-area-on.png" title="Botón Medir Áreas" /></td>
 									<td> Habilita poder medir áreas entre 3 o más puntos.
 									Uso: realice un click para indicar los primeros puntos y doble click para el punto final a medir. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-info-off.png" title="Botón Información" /></td>
+									<td><img class="ico" src="img/icon-info-on.png" title="Botón Información" /></td>
 									<td> Habilita poder obtener la información dentro de un popup de un lugar específico de cada capa.
 									Uso: realice un click en el lugar del cual se quiere saber su información. </td>
 								</tr>
 								<tr>
-									<td><img class="ico" src="img/icon-full-screen.png" title="Botón Pantalla Completa" /></td>
+									<td><img class="ico" src="img/icon-fullscreen-on.png" title="Botón Pantalla Completa" /></td>
 									<td> Abre una nueva ventana con el mapa en pantalla completa. </td>
 								</tr>
 
@@ -92,8 +92,8 @@
 
 				</div>
 			</div><!-- End text-help -->
-			<section>
-				<button id="showLeft" title="Herramientas"></button>
+			<section class="secTools">
+				<button class="showLeft" id="showLeft" title="Herramientas" ></button>
 			</section>
 			<div id="tools">
 				<div id="icons"></div><!--#icons-->
@@ -110,8 +110,8 @@
 		</nav><!--cbp-spmenu-s1 HERRAMIENTAS-->
 
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<section>
-				<button id="showRight" title="Leyenda"></button>
+			<section class="secLegend">
+				<button class="showRight" id="showRight" title="Leyenda" ></button>
 			</section>
 			<a href="http://geo.gob.bo" target="_blank" > <h3 title="Compartir para Crecer...">GeoBolivia<img style="border: 0;" src="img/icon-geobolivia.png" height="24" /></h3></a>
 			<div id="content_legend"></div>
@@ -153,6 +153,17 @@
 				var l = document.getElementById('cbp-spmenu-s2');
 				t.style.display = 'block';
 				l.style.display = 'block';
+			}
+			
+			function changeImageButton(){
+				alert("ssss");				
+				//alert(document.getElementById('showLeft').className);
+				/*
+				if(c == "style"+nameclass)
+					document.getElementById('showLeft').className=c;
+				else
+					document.getElementById('showLeft').className="styleshowLeft";
+					*/			
 			}
 		</script>
 		<script type="text/javascript"  src="lib/OpenLayers.js"></script>		
