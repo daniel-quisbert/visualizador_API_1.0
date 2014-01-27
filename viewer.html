@@ -3,17 +3,59 @@
 	<head>
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<title>API GeoBolivia - Compartir para crecer</title>
-		<meta content="API GeoBolivia: la Infraestructura de Datos Espaciales del Estado Plurinacional de Bolivia" name="description">		
+		<meta content="API GeoBolivia: la Infraestructura de Datos Espaciales del Estado Plurinacional de Bolivia" name="description">
 		<link rel="stylesheet" href="css/ext-all.css" type="text/css"/>
 		<link rel="stylesheet" href="css/geoext-all.css" type="text/css"/>
 		<link rel="stylesheet" href="css/gxtheme-gray.css" type="text/css"/>
-		<link rel="stylesheet" href="viewer.css" type="text/css"/>		
+		
 		<link rel="stylesheet" href="http://ol3js.org/en/master/build/ol.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
-		<link rel="stylesheet" type="text/css" href="css/component.css" />		
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" href="viewer.css" type="text/css"/>
 	</head>
 	<body>
-		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">			
+		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			<div class="vmcc4" id="cod-qr">
+				<!-- icono QR visible -->
+				<a href="#qr" title=" Compartir " id="ico-qr" onclick="hiddenToolsLegend();generateQr();"></a>
+				<!-- codigo QR invisible -->
+				<div class="shareqr" id="qr">
+					<a href="#cod-qr" class="vmcerrar" onclick="showToolsLegend();">cerrar</a>
+					
+					<div id="" class="popupFrame2">
+						<strong><h1>Compártelo con tus amigos</h1></strong>
+						<br />
+						<div id="qrsb">						
+										<button id="sb"  title="Facebook" onclick="socialShare(2);" >Facebook</button>
+										<button id="sb"  title="Twitter" onclick="socialShare(0);" >Twitter</button>
+										<button id="sb" title="Google+" onclick="socialShare(1);" >Google+</button>
+						</div>
+						<div style="width: auto;position: relative;">
+							<img id="permaQR" src="img/loading.gif" title="Código QR para ver el mapa"/>
+						</div>
+						
+					</div>
+					
+				</div><!-- End qr-->
+			</div><!-- End text -->
+
+			<section class="secTools">
+				<button class="showLeft" id="showLeft" title="Herramientas" ></button>
+			</section>
+
+			<div id="tools">
+				<div id="icons"></div><!--#icons-->
+				<div id="measure"></div><!--#measure-->
+
+				<div id="wrapper_fullscreen">
+					<div class="main2" id="main2">
+						<section>
+							<button id="fullScreen" title="Pantalla Completa" onclick="fullScreen(document.URL);"></button>
+						</section>
+					</div>
+				</div><!--#wrapper_fullscreen-->
+			</div><!--#tools-->
+
 			<div class="vmcc3" id="text-help">
 				<!-- icono Help visible -->
 				<a href="#help" title=" Ayuda " id="ico-help" onclick="hiddenToolsLegend();"></a>
@@ -21,7 +63,6 @@
 				<div class="vmoverlay" id="help">
 					<a href="#text-help" class="vmcerrar" onclick="showToolsLegend();">cerrar</a>
 					<div id="helpFrame" class="popupFrame">
-
 						<strong><h1>Como utilizar las herramientas</h1></strong>
 						<table>
 							<tbody>
@@ -87,26 +128,11 @@
 								</tr>
 							</tbody>
 						</table>
-
 					</div>
 
 				</div>
 			</div><!-- End text-help -->
-			<section class="secTools">
-				<button class="showLeft" id="showLeft" title="Herramientas" ></button>
-			</section>
-			<div id="tools">
-				<div id="icons"></div><!--#icons-->
-				<div id="measure"></div><!--#measure-->
 
-				<div id="wrapper_fullscreen">
-					<div class="main2" id="main2">
-						<section>
-							<button id="fullScreen" title="Pantalla Completa" onclick="fullScreen(document.URL);"></button>
-						</section>
-					</div>
-				</div><!--#wrapper_fullscreen-->
-			</div><!--#tools-->
 		</nav><!--cbp-spmenu-s1 HERRAMIENTAS-->
 
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
@@ -129,11 +155,10 @@
 			<img src="img/icon-loading.gif"/>
 			<span>Visualizador API - GeoBolivia</span>
 		</div>
-
 		<script src="js/classie.js"></script>
 		<script>
 			var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeft = document.getElementById('showLeft'), body = document.body;
-			showLeft.onclick = function() {
+			showLeft.onclick = function() {			
 				classie.toggle(this, 'active');
 				classie.toggle(menuLeft, 'cbp-spmenu-open');
 			};
@@ -141,34 +166,38 @@
 			showRight.onclick = function() {
 				classie.toggle(this, 'active');
 				classie.toggle(menuRight, 'cbp-spmenu-open');
-			};			
-			function hiddenToolsLegend(){				
+			}; 
+			function hiddenToolsLegend() {
 				var t = document.getElementById('tools');
 				var l = document.getElementById('cbp-spmenu-s2');
 				t.style.display = 'none';
-				l.style.display = 'none';				
+				l.style.display = 'none';
 			}
-			function showToolsLegend(){
+
+			function showToolsLegend() {
 				var t = document.getElementById('tools');
 				var l = document.getElementById('cbp-spmenu-s2');
 				t.style.display = 'block';
 				l.style.display = 'block';
 			}
-			
-			function changeImageButton(){
-				alert("ssss");				
-				//alert(document.getElementById('showLeft').className);
-				/*
-				if(c == "style"+nameclass)
-					document.getElementById('showLeft').className=c;
-				else
-					document.getElementById('showLeft').className="styleshowLeft";
-					*/			
+
+			function generateQr() {
+				var permaqr = OpenLayers.Util.getElement("permaQR");
+				permaqr.src = "http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=" + encodeURIComponent(document.URL + "&fs=1");
+			}
+
+			function socialShare(s) {				
+				var socialUrl = ['https://twitter.com/intent/tweet?text=', 
+				'https://plus.google.com/share?url=', 
+				'http://www.facebook.com/sharer/sharer.php?u='];
+				var options = ("toolbar=no, location=no, directories=no, status=no, menubar=no, witdh=100%, resizable=no, fullscreen=yes, scrollbars=auto");
+				window.open(socialUrl[s] + encodeURIComponent(document.URL.substring(0,document.URL.length-3)) + "&fs=1", "GeoBolivia", options);
 			}
 		</script>
-		<script type="text/javascript"  src="lib/OpenLayers.js"></script>		
+		
+		<script type="text/javascript"  src="lib/OpenLayers.js"></script>
 		<script type="text/javascript" src="lib/OpenStreetMap.js"></script>
-		<script type="text/javascript" src="viewer.js"></script>		
+		<script type="text/javascript" src="viewer.js"></script>
 		<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>

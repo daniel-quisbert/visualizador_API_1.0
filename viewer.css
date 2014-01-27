@@ -18,50 +18,49 @@ body {
 }
 
 #tools {
-	position: relative;	
+	position: relative;
 	z-index: 1200;
 	background-color: transparent;
 	/*background: none repeat scroll rgba(0, 0, 0, 1);*/
-	top: 44px;	
+	top: 44px;
 	width: 50px;
 	height: 100%;
-			
 	/*overflow: hidden;*/
 	/*border-bottom: 2px solid rgba(0, 0, 0, 0.5);
-	border-left:2px solid rgba(0, 0, 0, 0.5);
-	border-right:2px solid rgba(0, 0, 0, 0.5);
-	border-radius: 0 0 6px 6px;
-	color: #fff;*/
+	 border-left:2px solid rgba(0, 0, 0, 0.5);
+	 border-right:2px solid rgba(0, 0, 0, 0.5);
+	 border-radius: 0 0 6px 6px;
+	 color: #fff;*/
 }
 
-#tools #icons {	
+#tools #icons {
 	position: absolute;
-	overflow:auto;
-	width:auto;
-	height: 100%;	
+	overflow: auto;
+	width: auto;
+	height: 100%;
 }
 
 /*#tools #measure {
-	width:auto;
-	height: 400px;
-	position: absolute;	
-	bottom: 0px;
-	right: 0px;
-	padding-right: 10px;	
-	text-align:right;
-	
-}*/
+ width:auto;
+ height: 400px;
+ position: absolute;
+ bottom: 0px;
+ right: 0px;
+ padding-right: 10px;
+ text-align:right;
+
+ }*/
 #tools #measure {
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 0 0 8px 8px;
-	width:190px;
+	width: 190px;
 	height: 30px;
 	min-height: 0px;
 	max-height: 40px;
-	position: relative;	
+	position: relative;
 	left: 92px;
 	top: -43px;
-	padding-top: 8px;		
+	padding-top: 8px;
 	padding-left: 10px;
 	font-size: 1.2em;
 }
@@ -69,31 +68,9 @@ body {
 /**
  * 	Shadows box
  */
-#icons .olControlZoomToMaxExtentItemActive,
-#icons .olControlZoomToMaxExtentItemInactive:hover,
-#icons .olControlZoomToMaxExtentItemActive:hover,
-#icons .panItemInactive:hover,
-#icons .panItemActive, #icons .panItemActive:hover,
-#icons .olControlZoomInItemActive, 
-#icons .olControlZoomInItemActive:hover,
-#icons .olControlZoomInItemInactive:hover,
-#icons .olControlZoomOutItemActive,
-#icons .olControlZoomOutItemActive:hover,
-#icons .olControlZoomOutItemInactive:hover,
-#icons .pathItemInactive:hover, 
-#icons .pathItemActive, #icons .pathItemActive:hover,
-#icons .polygonItemInactive:hover, 
-#icons .polygonItemActive, #icons .polygonItemActive:hover,
-#icons .histPreviousItemInactive:hover,
-#icons .histPreviousItemActive, #icons .histPreviousItemActive:hover,
-#icons .histNextItemInactive:hover,
-#icons .histNextItemActive, #icons .histNextItemActive:hover,
-#icons .infoItemInactive:hover, 
-#icons .infoItemActive, #icons .infoItemActive:hover,
-#icons .fsItemInactive:hover,
-#icons .fsItemActive, #icons .fsItemActive:hover{	
+#icons .olControlZoomToMaxExtentItemActive, #icons .olControlZoomToMaxExtentItemInactive:hover, #icons .olControlZoomToMaxExtentItemActive:hover, #icons .panItemInactive:hover, #icons .panItemActive, #icons .panItemActive:hover, #icons .olControlZoomInItemActive, #icons .olControlZoomInItemActive:hover, #icons .olControlZoomInItemInactive:hover, #icons .olControlZoomOutItemActive, #icons .olControlZoomOutItemActive:hover, #icons .olControlZoomOutItemInactive:hover, #icons .pathItemInactive:hover, #icons .pathItemActive, #icons .pathItemActive:hover, #icons .polygonItemInactive:hover, #icons .polygonItemActive, #icons .polygonItemActive:hover, #icons .histPreviousItemInactive:hover, #icons .histPreviousItemActive, #icons .histPreviousItemActive:hover, #icons .histNextItemInactive:hover, #icons .histNextItemActive, #icons .histNextItemActive:hover, #icons .infoItemInactive:hover, #icons .infoItemActive, #icons .infoItemActive:hover, #icons .fsItemInactive:hover, #icons .fsItemActive, #icons .fsItemActive:hover {
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 	cursor: pointer;
 	background: none repeat scroll rgba(255, 255, 255, 0.2);
 	box-shadow: 0 0 0.15em 0.12em rgba(255, 255, 255, 0.6);
@@ -103,101 +80,90 @@ body {
 #icons .olButton {
 	z-index: 1401;
 	display: inline-block;
-	position: relative;	
+	position: relative;
 	background-repeat: no-repeat;
 	height: 38px;
 	width: 38px;
-	left: 6px;	
+	left: 6px;
 	margin-top: 4px;
 	border-radius: 6px;
-	
 	-moz-transition: color 0.4s ease;
 	-webkit-transition: color 0.4s ease;
 	-o-transition: color 0.4s ease;
 }
 /*
-#icons .olButton:hover {
-	background-repeat: no-repeat;
-	background-position:center;
-	cursor: pointer;
-	background: none repeat scroll rgba(255, 255, 255, 0.2);
-	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.8);
-	border-radius: 6px;
-				
-}*/
+ #icons .olButton:hover {
+ background-repeat: no-repeat;
+ background-position:center;
+ cursor: pointer;
+ background: none repeat scroll rgba(255, 255, 255, 0.2);
+ box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.8);
+ border-radius: 6px;
+
+ }*/
 
 /**
  * 	Vista inicial
  */
 #icons .olControlZoomToMaxExtentItemInactive {
-    background-image: url("img/icon-world-off.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
+	background-image: url("img/icon-world-off.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
 }
-#icons .olControlZoomToMaxExtentItemActive,
-#icons .olControlZoomToMaxExtentItemInactive:hover,
-#icons .olControlZoomToMaxExtentItemActive:hover {
-    background-image: url("img/icon-world-on.png") !important;    
+#icons .olControlZoomToMaxExtentItemActive, #icons .olControlZoomToMaxExtentItemInactive:hover, #icons .olControlZoomToMaxExtentItemActive:hover {
+	background-image: url("img/icon-world-on.png") !important;
 }
 /**
  * 	Move
  */
-#icons .panItemInactive{
+#icons .panItemInactive {
 	background-image: url("img/icon-move-off.png");
-	 background-repeat: no-repeat;
-	background-position:center;
-	
+	background-repeat: no-repeat;
+	background-position: center;
 }
-#icons .panItemInactive:hover,
-#icons .panItemActive, #icons .panItemActive:hover {
-	background-image: url("img/icon-move-on.png");	
+#icons .panItemInactive:hover, #icons .panItemActive, #icons .panItemActive:hover {
+	background-image: url("img/icon-move-on.png");
 }
 
 /**
  * 	Zoom
  */
-#icons .olControlZoomInItemInactive{
-    background-image: url("img/icon-zoomin-off.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
+#icons .olControlZoomInItemInactive {
+	background-image: url("img/icon-zoomin-off.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
 }
-#icons .olControlZoomInItemActive, 
-#icons .olControlZoomInItemActive:hover,
-#icons .olControlZoomInItemInactive:hover {	
-    background-image: url("img/icon-zoomin-on.png") !important;   
+#icons .olControlZoomInItemActive, #icons .olControlZoomInItemActive:hover, #icons .olControlZoomInItemInactive:hover {
+	background-image: url("img/icon-zoomin-on.png") !important;
 }
 
-#icons .olControlZoomOutItemInactive{
-    background-image: url("img/icon-zoomout-off.png") !important;
-    background-repeat: no-repeat;
-	background-position:center;
+#icons .olControlZoomOutItemInactive {
+	background-image: url("img/icon-zoomout-off.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
 }
-#icons .olControlZoomOutItemActive,
-#icons .olControlZoomOutItemActive:hover,
-#icons .olControlZoomOutItemInactive:hover {	
-    background-image: url("img/icon-zoomout-on.png") !important;  
+#icons .olControlZoomOutItemActive, #icons .olControlZoomOutItemActive:hover, #icons .olControlZoomOutItemInactive:hover {
+	background-image: url("img/icon-zoomout-on.png") !important;
 }
 
 /**
  * 	Measure
  */
-#icons .pathItemInactive{
+#icons .pathItemInactive {
 	background-image: url("img/icon-distance-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .pathItemInactive:hover, 
-#icons .pathItemActive, #icons .pathItemActive:hover {
+#icons .pathItemInactive:hover, #icons .pathItemActive, #icons .pathItemActive:hover {
 	background-image: url("img/icon-distance-on.png");
 }
-#icons .polygonItemInactive{
+#icons .polygonItemInactive {
 	background-image: url("img/icon-area-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .polygonItemInactive:hover, 
-#icons .polygonItemActive, #icons .polygonItemActive:hover {	
-	background-image: url("img/icon-area-on.png");	
+#icons .polygonItemInactive:hover, #icons .polygonItemActive, #icons .polygonItemActive:hover {
+	background-image: url("img/icon-area-on.png");
 }
 
 /**
@@ -206,33 +172,30 @@ body {
 #icons .histPreviousItemInactive {
 	background-image: url("img/icon-previous-off.png");
 	background-repeat: no-repeat;
-	background-position:center;	
+	background-position: center;
 }
-#icons .histPreviousItemInactive:hover,
-#icons .histPreviousItemActive, #icons .histPreviousItemActive:hover {	
-	background-image: url("img/icon-previous-on.png");	
+#icons .histPreviousItemInactive:hover, #icons .histPreviousItemActive, #icons .histPreviousItemActive:hover {
+	background-image: url("img/icon-previous-on.png");
 }
 #icons .histNextItemInactive {
 	background-image: url("img/icon-next-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .histNextItemInactive:hover,
-#icons .histNextItemActive, #icons .histNextItemActive:hover {	
-	background-image: url("img/icon-next-on.png");	
+#icons .histNextItemInactive:hover, #icons .histNextItemActive, #icons .histNextItemActive:hover {
+	background-image: url("img/icon-next-on.png");
 }
 
 /**
  * 	Info
  */
-#icons .infoItemInactive{
+#icons .infoItemInactive {
 	background-image: url("img/icon-info-off.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .infoItemInactive:hover, 
-#icons .infoItemActive, #icons .infoItemActive:hover {	
-	background-image: url("img/icon-info-on.png");	
+#icons .infoItemInactive:hover, #icons .infoItemActive, #icons .infoItemActive:hover {
+	background-image: url("img/icon-info-on.png");
 }
 
 /**
@@ -240,55 +203,53 @@ body {
  */
 #icons .fsItemInactive {
 	background-color: transparent;
-	background-image: url("img/icon-fullscreen-on.png");		
+	background-image: url("img/icon-fullscreen-on.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .fsItemInactive:hover,
-#icons .fsItemActive, #icons .fsItemActive:hover {
+#icons .fsItemInactive:hover, #icons .fsItemActive, #icons .fsItemActive:hover {
 	background-color: transparent;
 	background: none repeat scroll rgba(255, 255, 255, 0.1);
 	background-image: url("img/iconfullscreen-on.png");
-		
 	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+	background-position: center;
+	cursor: pointer;
 }
 
 /**
  * 	Salir
  */
-#icons .closeFsItemInactive{
+#icons .closeFsItemInactive {
 	background-color: transparent;
-	background-image: url("img/icon-close.png");		
+	background-image: url("img/icon-close.png");
 	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
 }
-#icons .closeFsItemInactive:hover{
+#icons .closeFsItemInactive:hover {
 	background-color: transparent;
-	background-image: url("img/icon-close2.png");		
+	background-image: url("img/icon-close2.png");
 	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+	background-position: center;
+	cursor: pointer;
 }
-#icons .closeFsItemActive, #icons .closeFsItemActive:hover{
+#icons .closeFsItemActive, #icons .closeFsItemActive:hover {
 	background-color: transparent;
 	background: none repeat scroll rgba(255, 255, 255, 0.1);
 	background-image: url("img/icon-close2.png");
-	
 	background-repeat: no-repeat;
-	background-position:center;cursor: pointer;
+	background-position: center;
+	cursor: pointer;
 }
 
-
-
-#icons .close2ItemInactive, #icons .close2ItemInactive:hover{
+#icons .close2ItemInactive, #icons .close2ItemInactive:hover {
 	height: 0px;
-	width:0;
-	display:none;
+	width: 0;
+	display: none;
 }
-#icons .close2ItemActive, #icons .close2ItemActive:hover{
+#icons .close2ItemActive, #icons .close2ItemActive:hover {
 	height: 0px;
-	display:none;
-	width:0;
+	display: none;
+	width: 0;
 }
 
 #ajaxloader {
@@ -311,7 +272,7 @@ body {
 	background-color: rgba(0, 0, 0, 0.8);
 	border-radius: 8px 8px 0 0;
 	text-align: center;
-	padding-top: 6px;	
+	padding-top: 6px;
 	height: 28px;
 	width: 120px;
 	color: #fff;
@@ -340,123 +301,154 @@ body {
  * 	HELP
  */
 
- /* el contenedor */
-  .vmcc3 {
-    /*display: inline-block;*/
-    position: absolute;
-    height: 38px;
-    width: 38px;
-    top: 2px;
-    left: 6px;
-    z-index: 1200;
-   
-    /*vertical-align:bottom;*/ 
-  }
-  .vmcc3 #ico-help{
-  	background-image: url("img/icon-help.png");
-  	background-color: transparent;			
+/* el contenedor */
+.vmcc3 {
+	/*display: inline-block;*/
+	position: absolute;
+	height: 38px;
+	width: 38px;
+	bottom: 2px;
+	/*top: 2px;*/
+	left: 6px;
+	z-index: 1200;
+	/*vertical-align:bottom;*/
+}
+.vmcc3 #ico-help {
+	background-image: url("img/icon-help.png");
+	background-color: transparent;
 	background-repeat: no-repeat;
-	background-position:center;
-  	
-  	
-  	display: block;
-  	top: 1px; 	
-  	}
-  .vmcc3 #ico-help:hover {
-  	background-repeat: no-repeat;
-	background-position:center;
+	background-position: center;
+	display: block;
+	top: 1px;
+}
+.vmcc3 #ico-help:hover {
+	background-repeat: no-repeat;
+	background-position: center;
 	cursor: pointer;
 	background: none repeat scroll rgba(255, 255, 255, 0.2);
 	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.6);
 	border-radius: 6px;
-  	background-image: url("img/icon-help-hover.png");  	
-  	}
-  	
-  .vmcc3 > a {position: relative;}
-  /* el div oculto donde se mostrará la imagen completa y ocupará toda la pantalla */
-  .vmoverlay{
-    background-color: rgba(0, 0, 0, 0.9);
-    height: 0;
-    left: 0;
-    overflow: hidden;
-    position: fixed;
-    text-align: center;
-    top: 0;
-    width: 0;
-    z-index: 1300;
-  }
-  /* el enlace para cerrar la ventana modal es un texto pero puede ser una imagen */
-  .vmoverlay a.vmcerrar {
-  	width: auto;
-    color: #FFF;
-    font-size: 26px;    
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;    
-    top: 4%;
-    left: 20%;
-    z-index: 1301;
-    -moz-transition: opacity 0.3s linear 1.2s;
-    -webkit-transition: opacity 0.3s linear 1.2s;
-    -o-transition: opacity 0.3s linear 1.2s;
-    -ms-transition: opacity 0.3s linear 1.2s;
-    transition: opacity 0.3s linear 1.2s;
-  }
-  /* la imagen de tamaño completo */
-  .vmoverlay img {
-    max-height: 100%;
-    position: relative;
-  }
-  /* la pseudo-clase es la que abrirá la ventana modal */
-  .vmoverlay:target {
-    bottom: 0;
-    height: auto;
-    padding-top: 100px;
-    right: 0;
-    width: auto;
-  }
-  /* las animaciones */
-  .vmoverlay:target img {
-    -moz-animation: fadeInScale 1.2s ease-in-out;
-    -webkit-animation: fadeInScale 1.2s ease-in-out;
-    -o-animation: fadeInScale 1.2s ease-in-out;
-    -ms-animation: fadeInScale 1.2s ease-in-out;
-    animation: fadeInScale 1.2s ease-in-out;
-  }
-  .vmoverlay:target a.vmcerrar { opacity: 1;}
-  @-webkit-keyframes fadeInScale {
-    0% { -webkit-transform: scale(0.6); opacity: 0; }
-    100% { -webkit-transform: scale(1); opacity: 1; }
-  }
-  @-moz-keyframes fadeInScale {
-    0% { -moz-transform: scale(0.6); opacity: 0; }
-    100% { -moz-transform: scale(1); opacity: 1; }
-  }
-  @-o-keyframes fadeInScale {
-    0% { -o-transform: scale(0.6); opacity: 0; }
-    100% { -o-transform: scale(1); opacity: 1; }
-  }
-  @-ms-keyframes fadeInScale {
-    0% { -ms-transform: scale(0.6); opacity: 0; }
-    100% { -ms-transform: scale(1); opacity: 1; }
-  }
-  @keyframes fadeInScale {
-    0% { transform: scale(0.6); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
-  }
+	background-image: url("img/icon-help-hover.png");
+}
+
+.vmcc3 > a {
+	position: relative;
+}
+/* el div oculto donde se mostrará la imagen completa y ocupará toda la pantalla */
+.vmoverlay {
+	background-color: rgba(0, 0, 0, 0.9);
+	height: 0;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 0;
+	z-index: 1300;
+}
+/* el enlace para cerrar la ventana modal es un texto pero puede ser una imagen */
+.vmoverlay a.vmcerrar {
+	width: auto;
+	color: #FFF;
+	font-size: 26px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 4%;
+	left: 20%;
+	z-index: 1301;
+	-moz-transition: opacity 0.3s linear 1.2s;
+	-webkit-transition: opacity 0.3s linear 1.2s;
+	-o-transition: opacity 0.3s linear 1.2s;
+	-ms-transition: opacity 0.3s linear 1.2s;
+	transition: opacity 0.3s linear 1.2s;
+}
+/* la imagen de tamaño completo */
+.vmoverlay img {
+	max-height: 100%;
+	position: relative;
+}
+/* la pseudo-clase es la que abrirá la ventana modal */
+.vmoverlay:target {
+	bottom: 0;
+	height: auto;
+	padding-top: 100px;
+	right: 0;
+	width: auto;
+}
+/* las animaciones */
+.vmoverlay:target img {
+	-moz-animation: fadeInScale 1.2s ease-in-out;
+	-webkit-animation: fadeInScale 1.2s ease-in-out;
+	-o-animation: fadeInScale 1.2s ease-in-out;
+	-ms-animation: fadeInScale 1.2s ease-in-out;
+	animation: fadeInScale 1.2s ease-in-out;
+}
+.vmoverlay:target a.vmcerrar {
+	opacity: 1;
+}
+@-webkit-keyframes fadeInScale {
+0% { -webkit-transform: scale(0.6); opacity: 0; }
+100% { -webkit-transform: scale(1); opacity: 1; }
+}
+@-moz-keyframes fadeInScale {
+0% { -moz-transform: scale(0.6); opacity: 0; }
+100% { -moz-transform: scale(1); opacity: 1; }
+}
+@-o-keyframes fadeInScale {
+0% { -o-transform: scale(0.6); opacity: 0; }
+100% { -o-transform: scale(1); opacity: 1; }
+}
+@-ms-keyframes fadeInScale {
+0% { -ms-transform: scale(0.6); opacity: 0; }
+100% { -ms-transform: scale(1); opacity: 1; }
+}
+@keyframes fadeInScale {
+0% { transform: scale(0.6); opacity: 0; }
+100% { transform: scale(1); opacity: 1; }
+}
+
+/**
+ * 	Share
+ */
+.vmcc4 {
+	/*display: inline-block;*/
+	position: absolute;
+	height: 38px;
+	width: 38px;
+	top: 2px;
+	left: 6px;
+	z-index: 1200;
+	/*vertical-align:bottom;*/
+}
+.vmcc4 #ico-qr {
+	background-color: transparent;
+	background-image: url("img/icon-share-off.png");
+	background-repeat: no-repeat;
+	background-position: center;
+	display: block;
+	top: 1px;
+}
+.vmcc4 #ico-qr:hover {
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+	background: none repeat scroll rgba(255, 255, 255, 0.2);
+	box-shadow: 0 0 0.14em 0.10em rgba(255, 255, 255, 0.6);
+	border-radius: 6px;
+	background-image: url("img/icon-share-on.png");
+}
 
 /**
  * 	Legend
  */
 
-#content_legend{
-	position:absolute;
+#content_legend {
+	position: absolute;
 	overflow: auto;
 	height: 100%;
 	margin-left: 2px;
-
 }
-
 
 /*
  * style popup API
@@ -529,39 +521,144 @@ body {
 /**
  * 	Ayuda
  */
-.popupFrame {    
-    position: absolute;
-    width:50%;
-    margin-right: 50%;
-    margin-left: 50%;
-    bottom: 10%;
-    overflow:auto;
-    top: 10%;
-    left: -25%;
-    right: -25%;
-    font-size: 15px;
-    padding: 1.5em 1em 1em 1em;    
-    color: #fff;
-}
-.popupFrame table {
-    border-collapse:collapse;    
-}
-.popupFrame strong {
-    font-size: 15px;    
-}
-.popupFrame table td {
-    padding: 0.2em;
-    border-bottom: 1px dotted #999999;    
-    text-align: left;
+.popupFrame2 {
+	position: absolute;
+	width: 400px;
+	margin-right: 50%;
+	margin-left: 50%;
+	left: -200px;
+	right: -200px;	
+	height:300px;
+	top: 10%;
+	font-size: 15px;
+	text-align:center;
+	
+	color: #fff;
 }
 
-.color-user{
+.popupFrame {
+	position: absolute;
+	width: 50%;
+	margin-right: 50%;
+	margin-left: 50%;
+	left: -25%;
+	right: -25%;
+	bottom: 10%;
+	overflow: auto;
+	top: 10%;
+	font-size: 15px;
+	text-align:center;
+	padding: 1.5em 1em 1em 1em;
+	color: #fff;
+}
+.popupFrame table {
+	border-collapse: collapse;
+}
+.popupFrame strong {
+	font-size: 15px;
+}
+.popupFrame table td {
+	padding: 0.2em;
+	border-bottom: 1px dotted #999999;
+	text-align: left;
+}
+
+.color-user {
 	background-color: rgba(0, 0, 0, 0.8);
 }
 
+/**
+ * cod QR - Social Buttons
+ */
+#qrsb {
+	position: absolute;
+	min-width: 150px;
+	max-width: 160px;
+	text-align: center;
+}	
+
+#permaQR {
+	float:right;
+	position: relative;
+	border: 2px solid rgba(255, 255, 255, 0.5);
+}
+
+#sb {	
+	width: 150px;
+	height: 44px;
+	vertical-align:middle;
+	padding: 10px 0 10px 0; 
+	color: #fff;
+	margin-bottom: 8px;
+	border-radius: 4px;
+	border: 1px solid rgba(255, 255, 255, 0.8);
+	background-color: rgba(0, 0, 0, 0.55);
+}
+
+#sb:hover {
+	color: #000;
+	
+	border: 1px solid rgba(0, 0, 0, 0.55);
+	background-color: rgba(255, 255, 255, 1);
+	cursor: pointer;
+}
 
 
 
-
+.shareqr{
+	
+}
+.shareqr {
+	background-color: rgba(0, 0, 0, 0.9);
+	height: 0;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 0;
+	z-index: 1300;
+}
+/* el enlace para cerrar la ventana modal es un texto pero puede ser una imagen */
+.shareqr a.vmcerrar {
+	width: auto;
+	color: #FFF;
+	font-size: 26px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	top: 4%;
+	left: 20%;
+	z-index: 1301;
+	-moz-transition: opacity 0.3s linear 1.2s;
+	-webkit-transition: opacity 0.3s linear 1.2s;
+	-o-transition: opacity 0.3s linear 1.2s;
+	-ms-transition: opacity 0.3s linear 1.2s;
+	transition: opacity 0.3s linear 1.2s;
+}
+/* la imagen de tamaño completo */
+.shareqr img {
+	max-height: 100%;
+	position: relative;
+}
+/* la pseudo-clase es la que abrirá la ventana modal */
+.shareqr:target {
+	top: 41px;
+	left: 45px;
+	width: 400px;
+	height: 300px;
+	padding-top: 10px;	
+}
+/* las animaciones */
+.shareqr:target img {
+	-moz-animation: fadeInScale 1.2s ease-in-out;
+	-webkit-animation: fadeInScale 1.2s ease-in-out;
+	-o-animation: fadeInScale 1.2s ease-in-out;
+	-ms-animation: fadeInScale 1.2s ease-in-out;
+	animation: fadeInScale 1.2s ease-in-out;
+}
+.shareqr:target a.vmcerrar {
+	opacity: 1;
+}
 
 
