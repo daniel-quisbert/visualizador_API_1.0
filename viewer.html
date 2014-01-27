@@ -19,7 +19,7 @@
 				<!-- icono QR visible -->
 				<a href="#qr" title=" Compartir " id="ico-qr" onclick="hiddenToolsLegend();generateQr();"></a>
 				<!-- codigo QR invisible -->
-				<div class="shareqr" id="qr">
+				<div class="vmoverlay" id="qr">
 					<a href="#cod-qr" class="vmcerrar" onclick="showToolsLegend();">cerrar</a>
 					
 					<div id="" class="popupFrame2">
@@ -188,10 +188,9 @@
 
 			function socialShare(s) {				
 				var socialUrl = ['https://twitter.com/intent/tweet?text=', 
-				'https://plus.google.com/share?url=', 
-				'http://www.facebook.com/sharer/sharer.php?u='];
+				'https://plus.google.com/share?url=', 'http://www.facebook.com/sharer/sharer.php?u='];
 				var options = ("toolbar=no, location=no, directories=no, status=no, menubar=no, witdh=100%, resizable=no, fullscreen=yes, scrollbars=auto");
-				window.open(socialUrl[s] + encodeURIComponent(document.URL.substring(0,document.URL.length-3)) + "&fs=1", "GeoBolivia", options);
+				window.open(socialUrl[s] + encodeURIComponent(document.URL.substring(0,document.URL.length-3)) + "&fs=1", "GeoBolivia", options);			
 			}
 		</script>
 		
