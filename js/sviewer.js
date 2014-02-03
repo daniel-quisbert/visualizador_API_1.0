@@ -363,8 +363,6 @@ function initmap() {
         }
     }
 
-
-
     /**
      * Call external viewers
      * @param viewerId {String} the external viewer codename
