@@ -70,10 +70,15 @@ function Configuration() {
 	this.infoLayer = false;
 	this.bgmap = "";
 	this.bgmap2 = "";
+	this.tools = "";
+	this.tools_nav = "";
+	this.newcolor="";
+	this.tit_leyenda="Leyenda";
 	//this.proxy = "/proxy/?url=";
 	this.proxy = "/cgi-bin/proxy.cgi?url=";
-	this.zdakar = '0';
-	// zdakar: variable sólo para los mapas del DAKAR
+	this.zdakar = '0';	// zdakar: variable sólo para los mapas del DAKAR
+	
+	
 }
 
 /**
@@ -83,11 +88,42 @@ Configuration.prototype.getUrlParameters = function() {
 	this.infoLayer = (getUrlParameter('infoLayer') === "on") || this.infoLayer;
 	this.bgmap = getUrlParameter('bgmap') || this.bgmap;
 	this.bgmap2 = getUrlParameter('bgmap2') || this.bgmap2;
+	this.tools = getUrlParameter('tools') || this.tools;
+	this.tools_nav = getUrlParameter('tools_nav') || this.tools_nav;
+	this.newcolor = getUrlParameter('newcolor') || this.newcolor;
+	this.tit_leyenda = getUrlParameter('tit_leyenda') || this.tit_leyenda;
 	this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
 	this.wmcUrl = this.wmcUrl.replace(/www.geo.gob.bo/g, 'geo.gob.bo');	
 	this.zdakar = getUrlParameter('zdakar') || this.zdakar;
-
 };
+
+/**
+ * Function para establecer el color de la leyenda
+ * de la barra de herramientas y el logo de GeoBolivia
+ */
+function hexToRgb(h){
+    var a = parseInt((cutHex(h)).substring(0,2),16), b = parseInt((cutHex(h)).substring(2,4),16), c = parseInt((cutHex(h)).substring(4,6),16);
+    return {
+		r: a,
+		g: b,
+		b: c
+	}   
+}
+
+function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1):h}
+
+function setColorTitulo(color, titleyenda){
+	var color2 = 'rgba('+ color.r +','+ color.g +','+ color.b +',0.8)';
+	document.getElementById('attribution').style.background = color2;
+	document.getElementById('measure').style.background = color2;
+	document.getElementById('secLegend').style.background = color2;
+	document.getElementById('secTools').style.background = color2;
+	document.getElementById('cbp-spmenu-s1').style.background = color2;
+	document.getElementById('cbp-spmenu-s2').style.background = color2;
+	
+	if(titleyenda!='')document.getElementById('tit_leyenda').textContent = titleyenda.toUpperCase();	
+}
+
 
 function replaceUrl(url, title) {
 	var geoserver = "geoserver";
@@ -133,11 +169,11 @@ function replaceUrl(url, title) {
 function createLegend2() {
 	var control, i, layer, url;
 	if (map && document.getElementById('content_legend')) {
-		for ( i = 0; i < map.layers.length; i += 1) {
+		for ( i = 1; i < map.layers.length; i += 1) {
 			layer = map.layers[i];
 			if (layer.getVisibility() && layer.params) {
-				url = layer.url + "request=GetLegendGraphic&format=image%2Fpng&width=20&height=20&layer=" + layer.params["LAYERS"];
-				layer.name = cleanNameLayer(layer.name) + "<br><img src='" + url + "'/>";
+				url = layer.url + "request=GetLegendGraphic&format=image%2Fpng&transparent=true&width=20&height=20&color=%23fff&layer=" + layer.params["LAYERS"];
+				layer.name = cleanNameLayer(layer.name) + "<br><span style='vertical-align:middle;padding:auto;background-color:rgba(255,255,255,0.1);width:220px;position:absolute;margin-bottom:10px;'><img src='" + url + "'/></span><br>";
 			}
 		}
 		control = new OpenLayers.Control.LayerSwitcher({
@@ -212,15 +248,21 @@ function createTools(conf) {
 		
 		panelCtl.addControls([
 			new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
-			navCtl.previous, 
-			navCtl.next,			
+		]);
+		if(conf.tools_nav){			
+			panelCtl.addControls([navCtl.previous,navCtl.next]);
+		}
+		
+		panelCtl.addControls([	
 			fakePanCtl,
 			new OpenLayers.Control.ZoomIn({title: "Acercarse"}),
-        	new OpenLayers.Control.ZoomOut({title: "Alejarse"}),
-        	createBotonDistance(),
-        	createBotonArea()
-        	]);
+        	new OpenLayers.Control.ZoomOut({title: "Alejarse"})        	
+        ]);
 		
+		if(conf.tools){			
+			panelCtl.addControls([createBotonDistance(conf),createBotonArea(conf)]);
+		}
+				
 		/*  Se crea el botón 'i' para mostrar la informacón de las capas en un popup
 		 **/			
 		if (conf.infoLayer) {			
@@ -240,7 +282,7 @@ function showMeasure(){
 	document.getElementById('measure').style.display = 'block';
 }
 
-function createBotonDistance(){
+function createBotonDistance(conf){
 	var lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {					
 					persist : true,
 					immediate : true,					
@@ -257,12 +299,22 @@ function createBotonDistance(){
 		title: 'Distancia',
 		eventListeners : {
 			'activate' : function() {
-						if(map.controls[15]){
+						if(map.controls[17]){							
 							map.controls[15].deactivate();
 							map.controls[16].deactivate();
-						}	
-						else{					
-							map.controls[14].deactivate();
+							map.controls[17].deactivate();
+						}else{
+							if(map.controls[15]){	
+								if(conf.infoLayer){								
+									map.controls[13].deactivate();
+								}																
+								map.controls[14].deactivate();
+								map.controls[15].deactivate();								
+							}
+							else{
+								map.controls[13].deactivate();
+								map.controls[12].deactivate();
+							}
 						}
 						lineMeasureCtl.activate();
 						showMeasure();
@@ -275,7 +327,7 @@ function createBotonDistance(){
 	});
 	return btn;
 }
-function createBotonArea(){
+function createBotonArea(conf){
 	var areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {			
 			persist : true,
 			immediate : true,			
@@ -292,12 +344,25 @@ function createBotonArea(){
 		title: 'Área',
 		eventListeners : {
 			'activate' : function() {
-						if(map.controls[15]){
+						// Popup son 2 controles
+						if(map.controls[17]){							
 							map.controls[14].deactivate();
 							map.controls[16].deactivate();
-						}	
-						else{					
-							map.controls[13].deactivate();				
+							map.controls[17].deactivate();
+						}						
+						else{		
+							if(map.controls[15]){
+								if(conf.infoLayer){
+									map.controls[14].deactivate();
+									map.controls[12].deactivate();
+								}else																
+									map.controls[13].deactivate();
+								map.controls[15].deactivate();	
+							}
+							else{
+								map.controls[13].deactivate();
+								map.controls[11].deactivate();
+							}
 						}
 						areaMeasureCtl.activate();
 						showMeasure();
@@ -669,15 +734,29 @@ function infoPopup() {
 		eventListeners : {
 			'activate' : function(){
 				hiddenMeasure();
-				map.controls[14].deactivate();
-				map.controls[15].deactivate();
+				if(map.controls[17]){
+					map.controls[15].deactivate();
+					map.controls[14].deactivate();
+					map.controls[17].deactivate();
+				}else{					
+					if(map.controls[15]){
+						map.controls[15].deactivate();
+						map.controls[13].deactivate();
+						map.controls[12].deactivate();
+					}
+					else{
+						map.controls[11].deactivate();
+					}
+				}	
+							
+				
 				info1.activate();
 			},
 			'deactivate' : function() {
 				if(popup)
 					popup.destroy();
 				info1.deactivate();
-				
+				hiddenMeasure();				
 			}
 		}
 	});
@@ -716,7 +795,7 @@ function fullScreen(url) {
 }
 
 function verifyFullScreen(panel) {
-	var btnFs = null, wrapper_fs, main2;	
+	var btnFs = null;	
 	if (getUrlParameter('fs') != null) {
 		// Maximizamos la pantalla
 		window.moveTo(0, 0);
@@ -728,12 +807,7 @@ function verifyFullScreen(panel) {
 				top.window.outerWidth = screen.availWidth;
 			}
 		}
-		
-		// Elimina el botón de pantalla completa		
-		wrapper_fs = document.getElementById('wrapper_fullscreen');
-		main2 = document.getElementById('main2');
-		wrapper_fs.removeChild(main2);
-		
+				
 		// Creamos e insertamos botón de salir
 		btnFs = new OpenLayers.Control.Button({
 		displayClass : 'closeFs',
@@ -747,8 +821,24 @@ function verifyFullScreen(panel) {
 				}
 			}
 		});		
-		panel.addControls([btnFs]);
+		
 	}
+	else{
+		// Creamos e insertamos botón de fullScreen
+		btnFs = new OpenLayers.Control.Button({
+		displayClass : 'fs',
+		title: 'Pantalla Completa',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		eventListeners : {
+				'activate' : function() {								
+					fullScreen(document.URL);
+				},
+				'deactivate' : function() {
+				}
+			}
+		});	
+	}
+	panel.addControls([btnFs]);
 }
 
 // main
@@ -757,9 +847,10 @@ init = function() {
 	OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0;
 	// make OL compute scale according to WMS spec
 	OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
-	conf = new Configuration();
+	conf = new Configuration();		
 	OpenLayers.ProxyHost = conf.proxy;
 	conf.getUrlParameters();	
+	setColorTitulo(hexToRgb(conf.newcolor),conf.tit_leyenda);	
 	createMap(conf);
 	changeTitle();	
 };

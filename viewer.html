@@ -15,6 +15,9 @@
 	</head>
 	<body>
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
+			
+			
+			
 			<div class="vmcc4" id="cod-qr">
 				<!-- icono QR visible -->
 				<a href="#qr" title=" Compartir " id="ico-qr" onclick="hiddenToolsLegend();generateQr();"></a>
@@ -39,22 +42,11 @@
 				</div><!-- End qr-->
 			</div><!-- End text -->
 
-			<section class="secTools">
+			<section class="secTools" id="secTools">
 				<button class="showLeft" id="showLeft" title="Herramientas" ></button>
 			</section>
 
-			<div id="tools">
-				<div id="icons"></div><!--#icons-->
-				<div id="measure"></div><!--#measure-->
-
-				<div id="wrapper_fullscreen">
-					<div class="main2" id="main2">
-						<section>
-							<button id="fullScreen" title="Pantalla Completa" onclick="fullScreen(document.URL);"></button>
-						</section>
-					</div>
-				</div><!--#wrapper_fullscreen-->
-			</div><!--#tools-->
+			
 
 			<div class="vmcc3" id="text-help">
 				<!-- icono Help visible -->
@@ -133,13 +125,21 @@
 				</div>
 			</div><!-- End text-help -->
 
+		<div id="tools">
+			<div id="icons"></div><!--#icons-->
+			<div id="measure"></div><!--#measure-->
+		</div><!--#tools-->
+
+
 		</nav><!--cbp-spmenu-s1 HERRAMIENTAS-->
 
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
-			<section class="secLegend">
+			<section class="secLegend" id="secLegend">
 				<button class="showRight" id="showRight" title="Leyenda" ></button>
 			</section>
-			<a href="http://geo.gob.bo" target="_blank" > <h3 title="Compartir para Crecer...">GeoBolivia<img style="border: 0;" src="img/icon-geobolivia.png" height="24" /></h3></a>
+			<a href="#">
+				<h3 id="tit_leyenda"></h3>
+			</a>
 			<div id="content_legend"></div>
 		</nav><!--cbp-spmenu-s2  LEYENDA-->
 
