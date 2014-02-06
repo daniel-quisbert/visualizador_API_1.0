@@ -19,7 +19,7 @@ body {
 
 #tools {
 	position: absolute;
-	z-index: 1300;
+	z-index: 1200;
 	background-color: transparent;
 	/*background: none repeat scroll rgba(0, 0, 0, 1);*/
 	top: 0px;
@@ -363,6 +363,53 @@ body {
 	-ms-transition: opacity 0.3s linear 1.2s;
 	transition: opacity 0.3s linear 1.2s;
 }
+/**
+ * 	*/
+.vmoverlay-qr {
+	background-color: rgba(0, 0, 0, 0.9);
+	border-radius: 8px;
+	
+	height: 0;
+	left: 0;
+	overflow: hidden;
+	position: fixed;
+	text-align: center;
+	top: 0;
+	width: 0;
+	z-index: 1300;	
+	
+}
+/* el enlace para cerrar la ventana modal es un texto pero puede ser una imagen */
+.vmoverlay-qr a.vmcerrar {
+	
+	width: 29px;
+	height:29px;	
+	/*border-bottom: 1px solid rgba(255,255,255,0.6);*/
+	font-size: 26px;
+	text-align:right;
+	opacity: 0;	
+	position: absolute;
+	top: 0px;
+	right: 0px;	
+	z-index: 1401;
+	
+	-moz-transition: opacity 0.3s linear 1.2s;
+	-webkit-transition: opacity 0.3s linear 1.2s;
+	-o-transition: opacity 0.3s linear 1.2s;
+	-ms-transition: opacity 0.3s linear 1.2s;
+	transition: opacity 0.3s linear 1.2s;
+}
+.vmoverlay-qr:target {
+	height: 200px;
+	width: 300px;
+	padding-top: 100px;
+	margin-left: 50%;
+	margin-top: 10%;	
+	left: -150px;
+}
+.vmoverlay-qr:target a.vmcerrar {
+	opacity: 1;
+}
 /* la imagen de tamaño completo */
 .vmoverlay img {
 	max-height: 100%;
@@ -523,17 +570,18 @@ body {
  */
 .popupFrame2 {
 	position: absolute;
-	width: 400px;
-	margin-right: 50%;
-	margin-left: 50%;
-	left: -200px;
-	right: -200px;	
-	height:300px;
-	top: 10%;
+	width: 100%;
+	height: 100%;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;		
 	font-size: 15px;
-	text-align:center;
-	
+	text-align:center;	
 	color: #fff;
+}
+.popupFrame2 h1{
+	font-size: 1.3em;
 }
 
 .popupFrame {
@@ -572,34 +620,47 @@ body {
  */
 #qrsb {
 	position: absolute;
-	min-width: 150px;
-	max-width: 160px;
+	top:60px;
+	width:100%;
+	height:50px;
 	text-align: center;
 }	
 
-#permaQR {
-	float:right;
-	position: relative;
-	border: 2px solid rgba(255, 255, 255, 0.5);
-}
-
-#sb {	
-	width: 150px;
-	height: 44px;
-	vertical-align:middle;
-	padding: 10px 0 10px 0; 
-	color: #fff;
-	margin-bottom: 8px;
-	border-radius: 4px;
-	border: 1px solid rgba(255, 255, 255, 0.8);
-	background-color: rgba(0, 0, 0, 0.55);
-}
-
-#sb:hover {
-	color: #000;
+#permaQR-div {
 	
-	border: 1px solid rgba(0, 0, 0, 0.55);
-	background-color: rgba(255, 255, 255, 1);
-	cursor: pointer;
+	position:absolute;
+	width: 100%;
+	text-align:center;
+	height:auto;
+		
+	bottom: 30px;
 }
+
+#permaQR {
+	-moz-transition: opacity 0.3s linear 1.2s;
+	-webkit-transition: opacity 0.3s linear 1.2s;
+	-o-transition: opacity 0.3s linear 1.2s;
+	-ms-transition: opacity 0.3s linear 1.2s;
+	transition: opacity 0.3s linear 1.2s;
+}
+
+#qrsb > button{
+	width: 42px;
+	height: 42px;
+	background-color: rgba(0, 0, 0, 0.7);	
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 25px;
+	border: 1px solid;
+}
+#sb1{background-image: url('img/icon-facebook-off.png');}
+#sb2 {background-image: url('img/icon-google-off.png');}
+#sb3 {background-image: url('img/icon-twitter-off.png');}
+
+#qrsb > button:hover{box-shadow: 0 0 0.15em 0.08em rgba(255, 255, 255, 0.4);
+	background-color: rgba(255, 255, 255, 0.9);	
+}
+#sb1:hover{background-image: url('img/icon-facebook-on.png');}
+#sb2:hover {background-image: url('img/icon-google-on.png');}
+#sb3:hover {background-image: url('img/icon-twitter-on.png');}
 

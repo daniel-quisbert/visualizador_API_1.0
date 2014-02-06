@@ -173,7 +173,7 @@ function createLegend2() {
 			layer = map.layers[i];
 			if (layer.getVisibility() && layer.params) {
 				url = layer.url + "request=GetLegendGraphic&format=image%2Fpng&transparent=true&width=20&height=20&color=%23fff&layer=" + layer.params["LAYERS"];
-				layer.name = cleanNameLayer(layer.name) + "<br><span style='vertical-align:middle;padding:auto;background-color:rgba(255,255,255,0.1);width:220px;position:absolute;margin-bottom:10px;'><img src='" + url + "'/></span><br>";
+				layer.name = cleanNameLayer(layer.name) + "<br><span style='vertical-align:middle;padding:auto;background-color:rgba(255,255,255,0.2);width:220px;position:absolute;margin-bottom:10px;'><img src='" + url + "'/></span><br>";
 			}
 		}
 		control = new OpenLayers.Control.LayerSwitcher({
