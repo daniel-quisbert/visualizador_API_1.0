@@ -495,8 +495,15 @@ function loadWmc(conf, protocol) {
                 }
                 if (conf.zdakar == "5") {
                     z = 8;
+                }
+                 else{
+                    if (conf.zdakar == "7") {
+                        z = 16;
+                     }
+                     if (conf.zdakar == "8") {
+                        z = 14;
+                     }
                 } 
-
                 b = boundZdakar(conf.zdakar);
 
 			}
@@ -547,6 +554,12 @@ function boundZdakar(zd) {
             // Bounds 
             b = new OpenLayers.Bounds(-7585697.00000000, -1865388.00000000, -7582232.00000000, -1861229.00000000);
             break;
+            
+         // Bounds Maratón Oruro
+        case "8":
+        b = new OpenLayers.Bounds(-7474989.32816870045,-2035306.35479249991,-7465938.31006669998,-2030903.34598649992);
+        break;
+    
 	}
 	return b;
 }
