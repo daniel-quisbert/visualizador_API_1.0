@@ -7,7 +7,6 @@
 		<link rel="stylesheet" href="css/ext-all.css" type="text/css"/>
 		<link rel="stylesheet" href="css/geoext-all.css" type="text/css"/>
 		<link rel="stylesheet" href="css/gxtheme-gray.css" type="text/css"/>
-		
 		<link rel="stylesheet" href="http://ol3js.org/en/master/build/ol.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
@@ -15,11 +14,9 @@
 	</head>
 	<body>
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
-			
 			<section class="secTools" id="secTools">
 				<button class="showLeft" id="showLeft" title="Herramientas" ></button>
-			</section>	
-
+			</section>
 			<div id="tools">
 				<div id="icons"></div><!--#icons-->
 				<div id="measure"></div><!--#measure-->
@@ -37,9 +34,9 @@
 						<strong><h1>Compártelo con el mundo</h1></strong>
 						<br />
 						<div id="qrsb">						
-							<button id="sb1" class="facebook"  title="Facebook" onclick="socialShare(2);" ></button>
-							<button id="sb2"  class="Twitter" title="Twitter" onclick="socialShare(0);" ></button>
-							<button id="sb3" class="Google+" title="Google+" onclick="socialShare(1);" ></button>
+							<button id="sb1" class="facebook"  title="Facebook" onclick="socialShare(0);" ></button>
+							<button id="sb2"  class="Twitter" title="Twitter" onclick="socialShare(1);" ></button>
+							<button id="sb3" class="Google+" title="Google+" onclick="socialShare(2);" ></button>
 						</div>						
 						<div id="permaQR-div">
 							<img id="permaQR" src="img/loading.gif" title="Código QR para ver el mapa"/>
@@ -185,8 +182,10 @@
 			}
 
 			function socialShare(s) {				
-				var socialUrl = ['https://twitter.com/intent/tweet?text=', 
-				'https://plus.google.com/share?url=', 'http://www.facebook.com/sharer/sharer.php?u='];
+				var socialUrl = [
+				'http://www.facebook.com/sharer/sharer.php?u=', 
+				'https://twitter.com/intent/tweet?text=', 
+				'https://plus.google.com/share?url='];
 				var options = ("toolbar=no, location=no, directories=no, status=no, menubar=no, witdh=100%, resizable=no, fullscreen=yes, scrollbars=auto");
 				window.open(socialUrl[s] + encodeURIComponent(document.URL.substring(0,document.URL.length-3)) + "&fs=1", "GeoBolivia", options);			
 			}

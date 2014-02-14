@@ -643,7 +643,9 @@ body {
 	-ms-transition: opacity 0.3s linear 1.2s;
 	transition: opacity 0.3s linear 1.2s;
 }
-
+/**
+ * 	Estilos para los botones Share facebook, Twitter y Google+
+ */
 #qrsb > button{
 	width: 42px;
 	height: 42px;
@@ -653,14 +655,17 @@ body {
 	border-radius: 25px;
 	border: 1px solid;
 }
-#sb1{background-image: url('img/icon-facebook-off.png');}
-#sb2 {background-image: url('img/icon-google-off.png');}
-#sb3 {background-image: url('img/icon-twitter-off.png');}
 
 #qrsb > button:hover{box-shadow: 0 0 0.15em 0.08em rgba(255, 255, 255, 0.4);
 	background-color: rgba(255, 255, 255, 0.9);	
 }
+
+#sb1{background-image: url('img/icon-facebook-off.png');}
+#sb2 {background-image: url('img/icon-twitter-off.png');}
+#sb3 {background-image: url('img/icon-google-off.png');}
+
 #sb1:hover{background-image: url('img/icon-facebook-on.png');}
-#sb2:hover {background-image: url('img/icon-google-on.png');}
-#sb3:hover {background-image: url('img/icon-twitter-on.png');}
+#sb2:hover {background-image: url('img/icon-twitter-on.png');}
+#sb3:hover {background-image: url('img/icon-google-on.png');}
+
 

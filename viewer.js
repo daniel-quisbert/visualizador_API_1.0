@@ -76,7 +76,7 @@ function Configuration() {
 	this.tit_leyenda="Leyenda";
 	//this.proxy = "/proxy/?url=";
 	this.proxy = "/cgi-bin/proxy.cgi?url=";
-	this.zdakar = '0';	// zdakar: variable sólo para los mapas del DAKAR
+	this.zoom = '0';	// zoom: variable sólo para los mapas del DAKAR
 	
 	
 }
@@ -94,7 +94,9 @@ Configuration.prototype.getUrlParameters = function() {
 	this.tit_leyenda = getUrlParameter('tit_leyenda') || this.tit_leyenda;
 	this.wmcUrl = getUrlParameter('wmc') || this.wmcURL;
 	this.wmcUrl = this.wmcUrl.replace(/www.geo.gob.bo/g, 'geo.gob.bo');	
-	this.zdakar = getUrlParameter('zdakar') || this.zdakar;
+	this.zoom = getUrlParameter('zoom') || this.zoom;
+	
+	
 };
 
 /**
@@ -483,31 +485,32 @@ function loadWmc(conf, protocol) {
 			createTools(conf);
 			removeAjaxLoader();
 
-			z = 6;
+			//z = 6;
 			// z: nivel de ZOOM para los mapas
 			b = context.bounds;
-			if (conf.zdakar != "0") {
-				if (conf.zdakar == "6") {
+			/*if (conf.zoom != "0") {
+				if (conf.zoom == "6") {
                     z = 15;
                 } 
                 else {
                     z = 16;
                 }
-                if (conf.zdakar == "5") {
+                if (conf.zoom == "5") {
                     z = 8;
                 }
                  else{
-                    if (conf.zdakar == "7") {
+                    if (conf.zoom == "7") {
                         z = 16;
                      }
-                     if (conf.zdakar == "8") {
+                     if (conf.zoom == "8") {
                         z = 14;
                      }
                 } 
-                b = boundZdakar(conf.zdakar);
+                b = boundzoom(conf.zoom);
 
-			}
-			map.setCenter(b.getCenterLonLat(), z);
+			}*/
+			
+			map.setCenter(b.getCenterLonLat(), conf.zoom);
 			// fondo de mapa con zoom de acuerdo a los boundingbox
 			//map.zoomToExtent(extendOsmGoogle(context.bounds));
 		}
@@ -517,17 +520,17 @@ function loadWmc(conf, protocol) {
 
 /**
  * Función especial sólo para los WMC de las regiones del Dakar
- * para utilizarla se debe enviar la variable zdakar en el envio GET
- * osea, aumentar la variable (&amp;zdakar=1,2,3,4,5, donde 1,2,3,4 y 5 son las regiones de las cuales se 
+ * para utilizarla se debe enviar la variable zoom en el envio GET
+ * osea, aumentar la variable (&amp;zoom=1,2,3,4,5, donde 1,2,3,4 y 5 son las regiones de las cuales se 
  * desea obtener los bounds) en la propiedad 'href' del código generado
  * como en el siguiente ejemplo :
  *
- * http://geo.gob.bo/api/viewer.html?wmc=http:/geo.gob.bo/IMG/wmc/dakar.wmc&amp;bgmap=fondo_osm_mapnik&amp;zdakar=1
+ * http://geo.gob.bo/api/viewer.html?wmc=http:/geo.gob.bo/IMG/wmc/dakar.wmc&amp;bgmap=fondo_osm_mapnik&amp;zoom=1
  *
  * Ajuste de los Bounds a los de las regiones del DAKAR, (Potosí, Tupiza, Uyuni, Villazón)
  */
 
-function boundZdakar(zd) {
+function boundzoom(zd) {
 	var b;
 	switch (zd) {
 		case "1":
@@ -863,7 +866,7 @@ init = function() {
 	conf = new Configuration();		
 	OpenLayers.ProxyHost = conf.proxy;
 	conf.getUrlParameters();	
-	setColorTitulo(hexToRgb(conf.newcolor),conf.tit_leyenda);	
+	setColorTitulo(hexToRgb(conf.newcolor),conf.tit_leyenda);
 	createMap(conf);
 	changeTitle();	
 };
