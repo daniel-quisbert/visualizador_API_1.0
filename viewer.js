@@ -484,32 +484,8 @@ function loadWmc(conf, protocol) {
 			createLegend2(conf);
 			createTools(conf);
 			removeAjaxLoader();
-
-			//z = 6;
-			// z: nivel de ZOOM para los mapas
-			b = context.bounds;
-			/*if (conf.zoom != "0") {
-				if (conf.zoom == "6") {
-                    z = 15;
-                } 
-                else {
-                    z = 16;
-                }
-                if (conf.zoom == "5") {
-                    z = 8;
-                }
-                 else{
-                    if (conf.zoom == "7") {
-                        z = 16;
-                     }
-                     if (conf.zoom == "8") {
-                        z = 14;
-                     }
-                } 
-                b = boundzoom(conf.zoom);
-
-			}*/
-			
+		
+			b = context.bounds;			
 			map.setCenter(b.getCenterLonLat(), conf.zoom);
 			// fondo de mapa con zoom de acuerdo a los boundingbox
 			//map.zoomToExtent(extendOsmGoogle(context.bounds));
@@ -518,54 +494,6 @@ function loadWmc(conf, protocol) {
 	return request;
 }
 
-/**
- * Función especial sólo para los WMC de las regiones del Dakar
- * para utilizarla se debe enviar la variable zoom en el envio GET
- * osea, aumentar la variable (&amp;zoom=1,2,3,4,5, donde 1,2,3,4 y 5 son las regiones de las cuales se 
- * desea obtener los bounds) en la propiedad 'href' del código generado
- * como en el siguiente ejemplo :
- *
- * http://geo.gob.bo/api/viewer.html?wmc=http:/geo.gob.bo/IMG/wmc/dakar.wmc&amp;bgmap=fondo_osm_mapnik&amp;zoom=1
- *
- * Ajuste de los Bounds a los de las regiones del DAKAR, (Potosí, Tupiza, Uyuni, Villazón)
- */
-
-function boundzoom(zd) {
-	var b;
-	switch (zd) {
-		case "1":
-			// Bounds Potosi
-			b = new OpenLayers.Bounds(-7320602.74929959979, -2224697.49292859994, -7318792.54567920044, -2223829.49119260022);
-			break;
-		case "2":
-			// Bounds Tupiza
-			b = new OpenLayers.Bounds(-7316226.49234179966, -2445124.33855020022, -7315502.41089360043, -2444777.13785579987);
-			break;
-		case "3":
-			// Bounds Uyuni
-			b = new OpenLayers.Bounds(-7439091.37992199976, -2328056.60538739990, -7438367.29847379960, -2327709.40469300002);
-			break;
-		case "4":
-			// Bounds Villazón
-			b = new OpenLayers.Bounds(-7302493.48005960044, -2522538.37589279981, -7301769.39861140028, -2522191.17519839993);
-			break;
-		case "5":
-			// Bounds Regiónwa
-			b = new OpenLayers.Bounds(-7676501.00000000, -2633883.00000000, -7248100.00000000, -2138282.00000000);
-			break;
-		case "6":
-            // Bounds 
-            b = new OpenLayers.Bounds(-7585697.00000000, -1865388.00000000, -7582232.00000000, -1861229.00000000);
-            break;
-            
-         // Bounds Maratón Oruro
-        case "8":
-        b = new OpenLayers.Bounds(-7474989.32816870045,-2035306.35479249991,-7465938.31006669998,-2030903.34598649992);
-        break;
-    
-	}
-	return b;
-}
 
 function extendOsmGoogle(extendMap) {
 	var nx, a;
