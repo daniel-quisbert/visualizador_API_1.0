@@ -113,7 +113,7 @@ function hexToRgb(h){
 }
 
 function cutHex(h) {return (h.charAt(0)=="#") ? h.substring(1):h}
-
+		
 function setColorTitulo(color, titleyenda){
 	var color2 = 'rgba('+ color.r +','+ color.g +','+ color.b +',0.8)';
 	document.getElementById('attribution').style.background = color2;
@@ -121,8 +121,7 @@ function setColorTitulo(color, titleyenda){
 	document.getElementById('secLegend').style.background = color2;
 	document.getElementById('secTools').style.background = color2;
 	document.getElementById('cbp-spmenu-s1').style.background = color2;
-	document.getElementById('cbp-spmenu-s2').style.background = color2;
-	
+	document.getElementById('cbp-spmenu-s2').style.background = color2;	
 	if(titleyenda!='')document.getElementById('tit_leyenda').textContent = titleyenda.toUpperCase();	
 }
 
@@ -249,7 +248,8 @@ function createTools(conf) {
 		map.addControl(navCtl);
 		
 		panelCtl.addControls([
-			new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"}),
+			createButtonHome(conf)
+			//new OpenLayers.Control.ZoomToMaxExtent({title: "Vista Inicial"})			
 		]);
 		if(conf.tools_nav){			
 			panelCtl.addControls([navCtl.previous,navCtl.next]);
@@ -262,7 +262,7 @@ function createTools(conf) {
         ]);
 		
 		if(conf.tools){			
-			panelCtl.addControls([createBotonDistance(conf),createBotonArea(conf)]);
+			panelCtl.addControls([createButtonDistance(conf),createButtonArea(conf)]);
 		}
 				
 		/*  Se crea el botón 'i' para mostrar la informacón de las capas en un popup
@@ -275,6 +275,28 @@ function createTools(conf) {
 		
 	//}
 }
+
+/**
+ * Botón personalizado para la vista inicial
+ * mnidificado con el nuevo zoom y los bounds
+ */
+function createButtonHome(conf){
+	var btnHome = new OpenLayers.Control.Button({
+		displayClass : 'home',
+		title: 'Vista Inicial',
+		type : OpenLayers.Control.TYPE_TOGGLE,
+		eventListeners : {
+				'activate' : function() {	
+					map.setCenter(map.maxExtent.getCenterLonLat(), conf.zoom);
+				},
+				'deactivate' : function() {
+					return false;
+				}
+			}
+		});
+	return btnHome;
+}
+
 function hiddenMeasure(){
 	// Ocultamos el contenedor Measure	
 	document.getElementById('measure').style.display = 'none';
@@ -284,7 +306,7 @@ function showMeasure(){
 	document.getElementById('measure').style.display = 'block';
 }
 
-function createBotonDistance(conf){
+function createButtonDistance(conf){
 	var lineMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Path, {					
 					persist : true,
 					immediate : true,					
@@ -329,7 +351,7 @@ function createBotonDistance(conf){
 	});
 	return btn;
 }
-function createBotonArea(conf){
+function createButtonArea(conf){
 	var areaMeasureCtl = new OpenLayers.Control.Measure(OpenLayers.Handler.Polygon, {			
 			persist : true,
 			immediate : true,			
@@ -440,7 +462,7 @@ function loadWmc(conf, protocol) {
 				restrictedExtent : context.bounds,
 				units : context.units,
 				maxExtent : context.bounds,
-				numZoomLevels : 22,
+				numZoomLevels : 20,
 				projection : new OpenLayers.Projection("EPSG:900913"),
 				displayProjection : new OpenLayers.Projection("EPSG:4326"),
 				controls: [
@@ -478,7 +500,6 @@ function loadWmc(conf, protocol) {
 				map.layers[i].setTileSize(new OpenLayers.Size(256, 256));
 				//map.layers[i].addOptions(options, true);
 			}
-
 			//Add Layers
 			map.addLayers(getLayerWmc(text));
 			createLegend2(conf);
@@ -612,10 +633,7 @@ function infoPopup() {
 	map.addControl(info1);
 	// register a listener for the getfeatureinfo event on the control
 	info1.events.on({
-		getfeatureinfo : function(info) {
-			//if(popup)
-			//	popup.destroy();
-			
+		getfeatureinfo : function(info) {			
 			var features = info.features;
 			var layersStr = "<ul id='tapi'>";
 			var model = [];
@@ -764,8 +782,7 @@ function verifyFullScreen(panel) {
 				'deactivate' : function() {
 				}
 			}
-		});		
-		
+		});
 	}
 	else{
 		// Creamos e insertamos botón de fullScreen
@@ -790,7 +807,9 @@ init = function() {
 	var conf;
 	OpenLayers.IMAGE_RELOAD_ATTEMPTS = 0;
 	// make OL compute scale according to WMS spec
-	OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
+	OpenLayers.DOTS_PER_INCH = 90.71428571428572;
+	OpenLayers.Util.onImageLoadErrorColor = 'transparent';
+	//OpenLayers.DOTS_PER_INCH = 25.4 / 0.28;
 	conf = new Configuration();		
 	OpenLayers.ProxyHost = conf.proxy;
 	conf.getUrlParameters();	

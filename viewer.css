@@ -68,7 +68,7 @@ body {
 /**
  * 	Shadows box
  */
-#icons .olControlZoomToMaxExtentItemActive, #icons .olControlZoomToMaxExtentItemInactive:hover, #icons .olControlZoomToMaxExtentItemActive:hover, #icons .panItemInactive:hover, #icons .panItemActive, #icons .panItemActive:hover, #icons .olControlZoomInItemActive, #icons .olControlZoomInItemActive:hover, #icons .olControlZoomInItemInactive:hover, #icons .olControlZoomOutItemActive, #icons .olControlZoomOutItemActive:hover, #icons .olControlZoomOutItemInactive:hover, #icons .pathItemInactive:hover, #icons .pathItemActive, #icons .pathItemActive:hover, #icons .polygonItemInactive:hover, #icons .polygonItemActive, #icons .polygonItemActive:hover, #icons .histPreviousItemInactive:hover, #icons .histPreviousItemActive, #icons .histPreviousItemActive:hover, #icons .histNextItemInactive:hover, #icons .histNextItemActive, #icons .histNextItemActive:hover, #icons .infoItemInactive:hover, #icons .infoItemActive, #icons .infoItemActive:hover, #icons .fsItemInactive:hover, #icons .fsItemActive, #icons .fsItemActive:hover {
+#icons .olControlZoomToMaxExtentItemActive, #icons .olControlZoomToMaxExtentItemInactive:hover, #icons .olControlZoomToMaxExtentItemActive:hover, #icons .panItemInactive:hover, #icons .panItemActive, #icons .panItemActive:hover, #icons .olControlZoomInItemActive, #icons .olControlZoomInItemActive:hover, #icons .olControlZoomInItemInactive:hover, #icons .olControlZoomOutItemActive, #icons .olControlZoomOutItemActive:hover, #icons .olControlZoomOutItemInactive:hover, #icons .pathItemInactive:hover, #icons .pathItemActive, #icons .pathItemActive:hover, #icons .polygonItemInactive:hover, #icons .polygonItemActive, #icons .polygonItemActive:hover, #icons .histPreviousItemInactive:hover, #icons .histPreviousItemActive, #icons .histPreviousItemActive:hover, #icons .histNextItemInactive:hover, #icons .histNextItemActive, #icons .histNextItemActive:hover, #icons .infoItemInactive:hover, #icons .infoItemActive, #icons .infoItemActive:hover, #icons .fsItemInactive:hover, #icons .fsItemActive, #icons .fsItemActive:hover #icons .homeItemActive, #icons .homeItemInactive:hover, #icons .homeItemActive:hover {
 	background-repeat: no-repeat;
 	background-position: center;
 	cursor: pointer;
@@ -113,6 +113,24 @@ body {
 #icons .olControlZoomToMaxExtentItemActive, #icons .olControlZoomToMaxExtentItemInactive:hover, #icons .olControlZoomToMaxExtentItemActive:hover {
 	background-image: url("img/icon-world-on.png") !important;
 }
+
+/**
+ * 	Vista inicial Nuevo
+ */
+#icons .homeItemInactive {
+	background-image: url("img/icon-world-off.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+#icons .homeItemActive, #icons .homeItemInactive:hover, #icons .homeItemActive:hover {
+	background-color: transparent;
+	background: none repeat scroll rgba(255, 255, 255, 0.1);
+	background-image: url("img/icon-world-on.png") !important;
+	background-repeat: no-repeat;
+	background-position: center;
+	cursor: pointer;
+}
+
 /**
  * 	Move
  */
