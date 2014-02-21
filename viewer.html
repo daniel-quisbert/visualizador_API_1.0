@@ -10,7 +10,7 @@
 		<link rel="stylesheet" href="http://ol3js.org/en/master/build/ol.css" type="text/css">
 		<link rel="stylesheet" type="text/css" href="css/default.css" />
 		<link rel="stylesheet" type="text/css" href="css/component.css" />
-		<link rel="stylesheet" href="viewer.css" type="text/css"/>
+		<link rel="stylesheet" href="viewer.css" type="text/css"/>		
 	</head>
 	<body>
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-left" id="cbp-spmenu-s1">
@@ -54,75 +54,11 @@
 					<a href="#text-help" class="vmcerrar" onclick="showToolsLegend();">cerrar</a>
 					<div id="helpFrame" class="popupFrame">
 						<strong><h1>Como utilizar las herramientas</h1></strong>
-						<table>
-							<tbody>
-								<tr>
-									<td><img class="ico" src="img/icon-world-on.png" title="Botón Vista Inicial" /></td>
-									<td> Posiciona el mapa a la vista inicial u original. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-previous-on.png" title="Botón Anterior" /></td>
-									<td> Posiciona el mapa a una vista o emplazamiento anterior. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-next-on.png" title="Botón Siguiente" /></td>
-									<td> Posiciona el mapa a una vista o emplazamiento posterior. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-move-on.png" title="Botón Mover" /></td>
-									<td> Indica que puede mover el mapa en cualquier dirección con la ayuda del mouse. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-zoomin-on.png" title="Botón Acercamiento" /></td>
-									<td> Realiza un acercamiento (zoomin) al interior del mapa.
-									Alternativa: realice doble clik en la zona preferida, o también con la rueda del mouse. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-zoomout-on.png" title="Botón Anterior" /></td>
-									<td> Realiza un alejamiento (zoomout) al mapa.
-									Alternativa: con la ruefa del mouse. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-distance-on.png" title="Botón Medir Distancias" /></td>
-									<td> Habilita poder medir distancias entre 2 o más puntos.
-									Uso: realice un click para indicar los primeros puntos y doble click para el punto final a medir. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-area-on.png" title="Botón Medir Áreas" /></td>
-									<td> Habilita poder medir áreas entre 3 o más puntos.
-									Uso: realice un click para indicar los primeros puntos y doble click para el punto final a medir. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-info-on.png" title="Botón Información" /></td>
-									<td> Habilita poder obtener la información dentro de un popup de un lugar específico de cada capa.
-									Uso: realice un click en el lugar del cual se quiere saber su información. </td>
-								</tr>
-								<tr>
-									<td><img class="ico" src="img/icon-fullscreen-on.png" title="Botón Pantalla Completa" /></td>
-									<td> Abre una nueva ventana con el mapa en pantalla completa. </td>
-								</tr>
-
-								<tr>
-									<td><strong><h2>Pantalla táctil</h2></strong></td>
-									<td> Pulsar en el mapa para mostrar la información.
-									Navegar sobre la plantalla para desplazarse en el mapa.
-									Puntear en la pantalla para acercarce y alejarse. </td>
-								</tr>
-								<tr>
-									<td><strong><h2>Teclado / Mouse</h2></strong></td>
-									<td> Hacer clic en el mapa para mostrar la información.
-									Para desplazarse,
-									Mantener pulsado el mouse y navegar sobre el mapa, o pulsar las flechas del teclado.
-									Para encuadrar,
-									mantener la tecla SHIFT (MAY) pulsada y trazar un rectangulo con el mouse. </td>
-								</tr>
-							</tbody>
-						</table>
+						<div id="tableInfo"><div>
 					</div>
 
 				</div>
 			</div><!-- End text-help -->
-
 		</nav><!--cbp-spmenu-s1 HERRAMIENTAS-->
 
 		<nav class="cbp-spmenu cbp-spmenu-vertical cbp-spmenu-right" id="cbp-spmenu-s2">
@@ -134,7 +70,6 @@
 			</a>
 			<div id="content_legend"></div>
 		</nav><!--cbp-spmenu-s2  LEYENDA-->
-
 		<div id="map"></div><!--#map-->
 		<div id="attribution">
 			<div><a href="http://geo.gob.bo" target="_blank" title="Infraestructura de Datos Espaciales">GeoBolivia<img src="img/geologo_16x16.png" width="20" height="22" alt="Logotipo de GeoBolivia" /> </a>
@@ -142,58 +77,14 @@
 		</div><!--#attribution-->
 
 		<div id="ajaxloader">
-			<img src="img/icon-loading.gif"/>
-			<span>Visualizador API - GeoBolivia</span>
+			<img src="img/icon-loading.gif"/><span>Visualizador API - GeoBolivia</span>
 		</div>
-		<script src="js/classie.js"></script>
-		<script>
-			var menuLeft = document.getElementById('cbp-spmenu-s1'), showLeft = document.getElementById('showLeft'), body = document.body;
-			showLeft.onclick = function() {			
-				classie.toggle(this, 'active');
-				classie.toggle(menuLeft, 'cbp-spmenu-open');
-			};
-			var menuRight = document.getElementById('cbp-spmenu-s2'), showRight = document.getElementById('showRight'), body = document.body;
-			showRight.onclick = function() {
-				classie.toggle(this, 'active');
-				classie.toggle(menuRight, 'cbp-spmenu-open');
-			}; 
-			function hiddenToolsLegend() {
-				
-				var st = document.getElementById('secTools');
-				var t = document.getElementById('tools');
-				var l = document.getElementById('cbp-spmenu-s2');
-				st.style.display = 'none';
-				t.style.display = 'none';
-				l.style.display = 'none';
-			}
-
-			function showToolsLegend() {
-				var st = document.getElementById('secTools');
-				var t = document.getElementById('tools');
-				var l = document.getElementById('cbp-spmenu-s2');
-				st.style.display = 'block';
-				t.style.display = 'block';
-				l.style.display = 'block';
-			}
-
-			function generateQr() {
-				var permaqr = OpenLayers.Util.getElement("permaQR");
-				permaqr.src = "http://chart.apis.google.com/chart?cht=qr&chs=150x150&chl=" + encodeURIComponent(document.URL + "&fs=1");
-			}
-
-			function socialShare(s) {				
-				var socialUrl = [
-				'http://www.facebook.com/sharer/sharer.php?u=', 
-				'https://twitter.com/intent/tweet?text=', 
-				'https://plus.google.com/share?url='];
-				var options = ("toolbar=no, location=no, directories=no, status=no, menubar=no, witdh=100%, resizable=no, fullscreen=yes, scrollbars=auto");
-				window.open(socialUrl[s] + encodeURIComponent(document.URL.substring(0,document.URL.length-3)) + "&fs=1", "GeoBolivia", options);			
-			}
-		</script>
 		
+		<script src="js/classie.js"></script>
 		<script type="text/javascript"  src="lib/OpenLayers.js"></script>
-		<script type="text/javascript" src="lib/OpenStreetMap.js"></script>
+		<script type="text/javascript" src="lib/OpenStreetMap.js"></script>		
 		<script type="text/javascript" src="viewer.js"></script>
+		<script type="text/javascript" src="js/help.js"></script>
 		<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/adapter/ext/ext-base.js"></script>
 		<script type="text/javascript" src="http://extjs.cachefly.net/ext-3.4.0/ext-all.js"></script>
 		<script type="text/javascript" src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
